@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="198" fill="#2a1f14"/><circle cx="200" cy="200" r="172" fill="#efe2c4"/>
+<g transform="translate(200 214) scale(.95) translate(-200 -200)"><g class="lg-cmelak">
+  <g class="lg-kridla">
+  <path d="M172 196 C 130 150, 92 120, 100 92 C 108 66, 150 76, 170 116 C 182 140, 182 170, 172 196 Z" fill="#fff" fill-opacity=".86" stroke="#2a1f14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M170 190 C 150 150, 128 118, 110 98 M150 150 C 138 140, 124 132, 112 118 M162 128 C 150 112, 140 100, 128 92" fill="none" stroke="#2a1f14" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+  <path d="M168 210 C 136 214, 108 204, 104 186 C 100 168, 128 162, 150 176 C 160 184, 166 196, 168 210 Z" fill="#fff" fill-opacity=".86" stroke="#2a1f14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M228 196 C 270 150, 308 120, 300 92 C 292 66, 250 76, 230 116 C 218 140, 218 170, 228 196 Z" fill="#fff" fill-opacity=".86" stroke="#2a1f14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M230 190 C 250 150, 272 118, 290 98 M250 150 C 262 140, 276 132, 288 118 M238 128 C 250 112, 260 100, 272 92" fill="none" stroke="#2a1f14" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+  <path d="M232 210 C 264 214, 292 204, 296 186 C 300 168, 272 162, 250 176 C 240 184, 234 196, 232 210 Z" fill="#fff" fill-opacity=".86" stroke="#2a1f14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+  <!-- nohy -->
+  <path d="M186 318 C 182 334, 176 346, 172 356 M214 318 C 218 334, 224 346, 228 356" fill="none" stroke="#2a1f14" stroke-width="9" stroke-linecap="round"/>
+  <path d="M160 358 q12-8 22 0 M218 358 q10-8 22 0" fill="none" stroke="#2a1f14" stroke-width="9" stroke-linecap="round"/>
+  <!-- zadeček s pruhy -->
+  <clipPath id="fav-zadek"><path d="M200 210 C 236 210, 250 252, 246 282 C 242 312, 222 334, 200 336 C 178 334, 158 312, 154 282 C 150 252, 164 210, 200 210 Z"/></clipPath>
+  <path d="M200 210 C 236 210, 250 252, 246 282 C 242 312, 222 334, 200 336 C 178 334, 158 312, 154 282 C 150 252, 164 210, 200 210 Z" fill="#f2b21b"/>
+  <g clip-path="url(#fav-zadek)" fill="#2a1f14">
+    <path d="M140 246 Q200 262 260 246 V264 Q200 280 140 264 Z"/>
+    <path d="M140 290 Q200 306 260 290 V308 Q200 324 140 308 Z"/>
+    <path d="M140 326 Q200 342 260 326 V350 H140 Z"/>
+  </g>
+  <path d="M200 210 C 236 210, 250 252, 246 282 C 242 312, 222 334, 200 336 C 178 334, 158 312, 154 282 C 150 252, 164 210, 200 210 Z" fill="none" stroke="#2a1f14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M176 232 q-6 18-2 36" fill="none" stroke="#fff6d8" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+  <!-- ruce -->
+  <path d="M172 220 C 160 232, 162 250, 166 262" fill="none" stroke="#2a1f14" stroke-width="12" stroke-linecap="round"/>
+  <path d="M230 218 C 248 226, 258 232, 262 226" fill="none" stroke="#2a1f14" stroke-width="12" stroke-linecap="round"/>
+  <!-- chlupatý límec -->
+  <path d="M158 204 l8-8 l4 8 l8-10 l5 9 l9-10 l8 10 l8-10 l6 10 l8-9 l4 9 l8-8 l4 12 l-6 8 l6 8 l-10 6 l2 9 l-12-2 l-4 9 l-9-7 l-8 8 l-8-8 l-8 8 l-8-8 l-9 7 l-4-9 l-12 2 l2-9 l-10-6 l6-8 l-6-8 z" fill="#3b2c1e" stroke="#2a1f14" stroke-width="3" stroke-linejoin="round"/>
+  <!-- hlava -->
+  <path d="M184 92 C 176 70, 162 58, 150 56 M216 92 C 226 68, 242 58, 254 58" fill="none" stroke="#2a1f14" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="148" cy="55" r="8" fill="#2a1f14"/><circle cx="256" cy="57" r="8" fill="#2a1f14"/>
+  <circle cx="145.5" cy="52.5" r="2.4" fill="#fff"/><circle cx="253.5" cy="54.5" r="2.4" fill="#fff"/>
+  <path d="M200 88 C 236 88, 252 116, 250 146 C 248 176, 228 196, 200 196 C 172 196, 152 176, 150 146 C 148 116, 164 88, 200 88 Z" fill="#f7c948" stroke="#2a1f14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M170 106 q-10 14-8 32" fill="none" stroke="#fff6d8" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+  <ellipse cx="181" cy="140" rx="14" ry="19" fill="#2a1f14"/><ellipse cx="219" cy="140" rx="14" ry="19" fill="#2a1f14"/>
+  <circle cx="176" cy="132" r="5.5" fill="#fff"/><circle cx="214" cy="132" r="5.5" fill="#fff"/>
+  <circle cx="186" cy="148" r="2.4" fill="#fff" opacity=".8"/><circle cx="224" cy="148" r="2.4" fill="#fff" opacity=".8"/>
+  <path d="M184 170 q16 14 32 0" fill="none" stroke="#2a1f14" stroke-width="4.5" stroke-linecap="round"/>
+  <ellipse cx="166" cy="164" rx="7" ry="4.5" fill="#f08a6e" opacity=".6"/><ellipse cx="234" cy="164" rx="7" ry="4.5" fill="#f08a6e" opacity=".6"/>
+  <g class="lg-pivo">
+  <path d="M146 240 h10 a14 14 0 0 1 14 14 v24 a14 14 0 0 1 -14 14 h-10" fill="none" stroke="#2a1f14" stroke-width="10"/>
+  <path d="M146 240 h10 a14 14 0 0 1 14 14 v24 a14 14 0 0 1 -14 14 h-10" fill="none" stroke="#f3e7cc" stroke-width="4"/>
+  <rect x="86" y="222" width="62" height="86" rx="8" fill="#f0a91c" stroke="#2a1f14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M98 236 v58 M112 236 v58 M126 236 v58" stroke="#fff3c9" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+  <circle cx="136" cy="262" r="2.6" fill="#fff6d8"/><circle cx="104" cy="282" r="2.2" fill="#fff6d8"/><circle cx="120" cy="252" r="1.8" fill="#fff6d8"/>
+  <path d="M82 226 c-6-12 6-22 16-16 c2-14 22-16 28-6 c8-10 26-6 26 8 c10 2 10 16 0 18 c0 8-8 12-12 6 c-2 10-14 10-14 0 c-4 8-14 8-14-2 c-6 8-18 4-16-4 c-10 2-16-6-14-4 z" fill="#fffaf0" stroke="#2a1f14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M92 232 c3 7 3 16 0 22 c-3-6-3-15 0-22 z" fill="#fffaf0" stroke="#2a1f14" stroke-width="3"/>
+</g>
+  <g class="lg-pizza">
+  <path d="M248 238 L 300 168 C 316 176, 328 190, 334 206 Z" fill="#fbd34d" stroke="#2a1f14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M296 164 C 316 172, 332 188, 340 208 L 333 212 C 326 194, 314 180, 298 172 Z" fill="#d98b3a" stroke="#2a1f14" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="300" cy="196" r="9" fill="#c8452b" stroke="#2a1f14" stroke-width="3"/>
+  <circle cx="276" cy="212" r="7.5" fill="#c8452b" stroke="#2a1f14" stroke-width="3"/>
+  <circle cx="318" cy="208" r="6" fill="#c8452b" stroke="#2a1f14" stroke-width="3"/>
+  <circle cx="302" cy="196" r="2" fill="#f08a6e"/><circle cx="278" cy="211" r="1.6" fill="#f08a6e"/>
+  <path d="M262 222 q2 12 6 2 M286 222 q3 16 7 0 M304 214 q2 10 5 1" fill="none" stroke="#2a1f14" stroke-width="3" stroke-linecap="round"/>
+  <path d="M264 223 q2 9 4 1 M288 222 q3 12 5 0" fill="none" stroke="#fbd34d" stroke-width="3" stroke-linecap="round"/>
+  <path d="M290 188 l4 4 M266 226 l3-3" stroke="#4f7a35" stroke-width="3.5" stroke-linecap="round"/>
+</g>
+  <!-- dlaně přes ucho a pizzu -->
+  <circle cx="168" cy="264" r="10" fill="#2a1f14"/>
+  <circle cx="262" cy="226" r="10" fill="#2a1f14"/>
+</g></g></svg>
