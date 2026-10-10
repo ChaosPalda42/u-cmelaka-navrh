@@ -1,23 +1,55 @@
 {
   "nazev": "U Čmeláka",
   "podtitul": "bistro · pizzerie · kavárna",
-  "adresa": { "ulice": "Řadová 546", "psc": "262 04", "obec": "Nová Ves pod Pleší" },
-  "gps": { "lat": 49.8413551, "lon": 14.2783515 },
+  "adresa": {
+    "ulice": "Řadová 546",
+    "psc": "262 04",
+    "obec": "Nová Ves pod Pleší"
+  },
+  "gps": {
+    "lat": 49.8413551,
+    "lon": 14.2783515
+  },
   "telefon": "+420 774 160 240",
-  "email": "objednavky@u-cmelaka.cz",
-  "web": "u-cmelaka.cz",
+  "email": "",
+  "web": "bistroucmelaka.cz",
   "ico": "05483166",
   "od_roku": 2021,
   "rozvrh": [
     null,
-    { "od": "15:00", "do": "21:00" },
-    { "od": "15:00", "do": "21:00" },
-    { "od": "15:00", "do": "21:00" },
-    { "od": "15:00", "do": "22:00" },
-    { "od": "15:00", "do": "22:00" },
-    { "od": "15:00", "do": "21:00" }
+    {
+      "od": "15:00",
+      "do": "21:00"
+    },
+    {
+      "od": "15:00",
+      "do": "21:00"
+    },
+    {
+      "od": "15:00",
+      "do": "21:00"
+    },
+    {
+      "od": "15:00",
+      "do": "22:00"
+    },
+    {
+      "od": "15:00",
+      "do": "22:00"
+    },
+    {
+      "od": "15:00",
+      "do": "21:00"
+    }
   ],
   "krabice": 15,
-  "platby": ["hotově", "kartou"],
-  "_zdroj": "Adresa, telefon, IČO, otevírací doba a popis z veřejného zápisu na firmy.cz (10. 10. 2026). E-mail na doméně u-cmelaka.cz je návrh – doména existuje, hosting je vypnutý."
+  "platby": [
+    "hotově",
+    "kartou"
+  ],
+  "skryt_pred_vyhledavaci": true,
+  "objednavky": {
+    "zapnuto": false,
+    "email": ""
+  }
 }

@@ -278,6 +278,20 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var k = kosik(), s = souhrn(k);
+      var odeslat = $("[data-odeslat]");
+      if (!D.emailem) {
+        // objednávka po telefonu: stačí košík a čas, pak ukážeme, co nahlásit
+        var ch = {};
+        if (!(s.pocetKusu > 0)) ch.kosik = "Košík je zatím prázdný.";
+        if (!zvolenyCas) ch.cas = "Vyberte čas, kdy si pro jídlo přijdete.";
+        ukazChyby(ch);
+        if (ch.kosik || ch.cas) { if (ch.cas && $("[data-sloty] input:not(:disabled)")) $("[data-sloty] input:not(:disabled)").focus(); return; }
+        var radky = CM.objednavka.textProKuchyni({ cislo: "", cas: zvolenyCas, udaje: { jmeno: "", telefon: "", poznamka: "" }, souhrn: s }).split("\n").slice(3);
+        $("[data-p-cas]").textContent = zvolenyCas;
+        $("[data-p-text]").textContent = ["Pizza s sebou na " + zvolenyCas].concat(radky).join("\n");
+        ukazPotvrzeni();
+        return;
+      }
       var udaje = { jmeno: form.jmeno.value, telefon: form.telefon.value, email: form.email.value, poznamka: form.poznamka.value, souhlas: form.souhlas.checked };
       var v = CM.objednavka.zkontroluj(udaje, { pocetKusu: s.pocetKusu, cas: zvolenyCas });
       var hl = CM.objednavka.hlaskyObjednavky(v.errors);
@@ -288,16 +302,26 @@
         if (prvni) prvni.focus(); else if (v.errors.kosik) $("[data-kosik-prazdny] a").focus();
         return;
       }
-      var poradi = (parseInt(nacti(KLIC_OBJ) || "0", 10) || 0) + 1; uloz(KLIC_OBJ, String(poradi));
-      var cislo = CM.objednavka.cisloObjednavky(ted().datum, poradi);
-      $("[data-p-cislo]").textContent = cislo;
-      $("[data-p-cas]").textContent = zvolenyCas;
-      $("[data-p-text]").textContent = CM.objednavka.textProKuchyni({ cislo: cislo, cas: zvolenyCas, udaje: udaje, souhrn: s });
-      ulozKosik([]);
-      stranaObjednavky.hidden = true; $("[data-demo-cas]").hidden = true;
+      var text = CM.objednavka.textProKuchyni({ cislo: "z webu", cas: zvolenyCas, udaje: udaje, souhrn: s });
+      odeslat.disabled = true;
+      fetch("/objednat.php", { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ typ: "objednavka", jmeno: udaje.jmeno, telefon: udaje.telefon, email: udaje.email, text: text, web: form.web ? form.web.value : "" }) })
+        .then(function (r) { return r.json(); })
+        .catch(function () { return { ok: false, chyba: "Nejde se spojit se serverem. Zavolejte nám prosím na " + D.telefon + "." }; })
+        .then(function (d) {
+          odeslat.disabled = false;
+          if (!d.ok) { ukazChyby({ kosik: d.chyba || ("Objednávka se neodeslala. Zavolejte nám prosím na " + D.telefon + ".") }); return; }
+          $("[data-p-cas]").textContent = zvolenyCas;
+          $("[data-p-text]").textContent = text;
+          ulozKosik([]);
+          ukazPotvrzeni();
+        });
+    });
+    function ukazPotvrzeni() {
+      stranaObjednavky.hidden = true;
       $(".stranka-hlava").hidden = true;
       var p = $("[data-potvrzeni]"); p.hidden = false; p.focus(); window.scrollTo(0, 0);
-    });
+    }
     form.addEventListener("input", function (e) { if (e.target.name) ukazChyby({}, e.target.name); });
     vykresliKosik();
   }
@@ -334,8 +358,18 @@
         var obal = el.closest(".pole"); if (obal) obal.classList.toggle("ma-chybu", !!t);
       });
       if (Object.keys(v.errors).length) { var f = $(".ma-chybu input", oslava); if (f) f.focus(); return; }
-      var hotovo = $("[data-hotovo]", oslava); hotovo.hidden = false; hotovo.focus();
-      $$("input, select, textarea, button", oslava).forEach(function (x) { x.disabled = true; });
+      var text = ["Poptávka oslavy", "Kdy: " + h.datum, "Kolik lidí: " + h.hoste, "Co slaví: " + oslava.typ.value, "Jméno: " + h.jmeno.trim(), "Telefon: " + CM.validace.formatujTelefon(h.telefon)]
+        .concat(oslava.zprava.value.trim() ? ["", "Představa:", oslava.zprava.value.trim()] : []).join("\n");
+      var chOdesl = $("[data-chyba-odeslani]", oslava);
+      fetch("/objednat.php", { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ typ: "oslava", jmeno: h.jmeno, telefon: h.telefon, text: text, web: oslava.web ? oslava.web.value : "" }) })
+        .then(function (r) { return r.json(); })
+        .catch(function () { return { ok: false }; })
+        .then(function (d) {
+          if (!d.ok) { if (chOdesl) { chOdesl.hidden = false; chOdesl.textContent = (d && d.chyba) || ("Poptávka se neodeslala. Zavolejte nám prosím na " + D.telefon + "."); } return; }
+          var hotovo = $("[data-hotovo]", oslava); hotovo.hidden = false; hotovo.focus();
+          $$("input, select, textarea, button", oslava).forEach(function (x) { x.disabled = true; });
+        });
     });
   }
 

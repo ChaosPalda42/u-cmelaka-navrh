@@ -2,7 +2,7 @@
 import asyncio, sys
 from playwright.async_api import async_playwright
 Z = sys.argv[1]
-STRANKY = ["index.html", "menu.html", "objednavka.html", "zahrada.html", "akce.html", "kontakt.html", "404.html"]
+STRANKY = ["", "menu.html", "objednavka.html", "zahrada.html", "akce.html", "kontakt.html", "neexistuje"]
 # vracející se návštěvník: uložený tmavý režim, plný košík i s rozbitými řádky, starší pořadí objednávek
 NAVRAT = """try{localStorage.setItem('cm-tema','tmavy');localStorage.setItem('cm-poradi','41');
 localStorage.setItem('cm-kosik',JSON.stringify([{id:'cmelak',pocet:2,priplatky:['vejce','syr']},{id:'zmizela',pocet:1},{id:'limonada',pocet:3},{id:'hranolky',pocet:1}]))}catch(e){}"""

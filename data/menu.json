@@ -1,5 +1,4 @@
 {
- "_pozn": "Podle tištěného lístku U Čmeláka (fotky od Michaela 10. 10. 2026). Konkrétní seznam příplatkových surovin je odvozený ze surovin na pizzách – lístek uvádí jen „uzeniny, sýry 40 Kč, ostatní 20 Kč“.",
  "kategorie": [
   {
    "id": "pizza",
@@ -124,7 +123,7 @@
    "cena": 20
   }
  ],
- "priplatky_text": "uzeniny a sýry 40 Kč za surovinu, ostatní 20 Kč za surovinu, krabice 15 Kč",
+ "priplatky_text": "Uzeniny a sýry 40 Kč za surovinu, ostatní suroviny 20 Kč. Pizza krabice 15 Kč.",
  "polozky": [
   {
    "id": "margherita",
@@ -136,7 +135,8 @@
    "stitky": [
     "vege"
    ],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": true
   },
   {
    "id": "funghi",
@@ -148,7 +148,8 @@
    "stitky": [
     "vege"
    ],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "prosciutto-cotto",
@@ -158,7 +159,8 @@
    "cena": 195,
    "slozeni": "tomatový základ, mozzarella, šunka",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "vegetariana",
@@ -170,7 +172,8 @@
    "stitky": [
     "vege"
    ],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "capricciosa",
@@ -180,7 +183,8 @@
    "cena": 230,
    "slozeni": "tomatový základ, mozzarella, šunka, žampiony, artyčoky",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": true
   },
   {
    "id": "quattro-formaggi",
@@ -193,7 +197,8 @@
     "vege",
     "smetana"
    ],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": true
   },
   {
    "id": "messicana",
@@ -205,7 +210,8 @@
    "stitky": [
     "palive"
    ],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": true
   },
   {
    "id": "picante",
@@ -217,7 +223,8 @@
    "stitky": [
     "palive"
    ],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "salami",
@@ -227,7 +234,8 @@
    "cena": 220,
    "slozeni": "tomatový základ, mozzarella, salám",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "bacon",
@@ -237,7 +245,8 @@
    "cena": 230,
    "slozeni": "tomatový základ, mozzarella, anglická slanina, cibule",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "prosciutto-cotto-funghi",
@@ -247,7 +256,8 @@
    "cena": 210,
    "slozeni": "tomatový základ, mozzarella, šunka, žampiony",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "spinaci",
@@ -259,7 +269,8 @@
    "stitky": [
     "smetana"
    ],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "prosciutto-crudo",
@@ -269,7 +280,8 @@
    "cena": 235,
    "slozeni": "tomatový základ, mozzarella, prosciutto crudo",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "utopenec",
@@ -278,7 +290,8 @@
    "cena": 75,
    "slozeni": "",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "hermelin",
@@ -289,7 +302,8 @@
    "stitky": [
     "vege"
    ],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "kimchi",
@@ -298,7 +312,8 @@
    "cena": 125,
    "slozeni": "",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "hranolky",
@@ -309,7 +324,8 @@
    "stitky": [
     "vege"
    ],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "lizatko",
@@ -318,7 +334,8 @@
    "cena": 20,
    "slozeni": "",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "bramburky",
@@ -327,7 +344,8 @@
    "cena": 55,
    "slozeni": "",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "tycinky",
@@ -336,7 +354,8 @@
    "cena": 35,
    "slozeni": "",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "orisky",
@@ -345,7 +364,8 @@
    "cena": 45,
    "slozeni": "",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "limonady",
@@ -354,7 +374,8 @@
    "cena": 65,
    "slozeni": "",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "plechovky",
@@ -363,7 +384,8 @@
    "cena": 42,
    "slozeni": "",
    "stitky": [],
-   "objednat": true
+   "objednat": true,
+   "na_uvodu": false
   },
   {
    "id": "voda-perliva",
@@ -372,7 +394,8 @@
    "cena": 35,
    "slozeni": "0,5 l",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "voda-kohoutkova",
@@ -381,7 +404,8 @@
    "cena": 15,
    "slozeni": "0,5 l",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "nealko-rozlevane",
@@ -390,7 +414,8 @@
    "cena": 10,
    "slozeni": "0,1 l",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "pititko",
@@ -399,7 +424,8 @@
    "cena": 25,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "pilsner-03",
@@ -408,7 +434,8 @@
    "cena": 45,
    "slozeni": "0,3 l",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "pilsner-05",
@@ -417,7 +444,8 @@
    "cena": 56,
    "slozeni": "0,5 l",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "nealko-pivo",
@@ -426,7 +454,8 @@
    "cena": 45,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "latte",
@@ -435,7 +464,8 @@
    "cena": 75,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "cappuccino",
@@ -444,7 +474,8 @@
    "cena": 65,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "espresso",
@@ -453,7 +484,8 @@
    "cena": 50,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "caj",
@@ -462,7 +494,8 @@
    "cena": 50,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "aperol",
@@ -471,7 +504,8 @@
    "cena": 120,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "limoncello",
@@ -480,7 +514,8 @@
    "cena": 120,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "hugo",
@@ -489,7 +524,8 @@
    "cena": 120,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "mojito",
@@ -498,7 +534,8 @@
    "cena": 135,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "cuba-libre",
@@ -507,7 +544,8 @@
    "cena": 120,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "koktejly",
@@ -516,7 +554,8 @@
    "cena": null,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "vodka",
@@ -525,7 +564,8 @@
    "cena": 85,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "havana",
@@ -534,7 +574,8 @@
    "cena": 85,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "jagermeister",
@@ -543,7 +584,8 @@
    "cena": 85,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "tullamore",
@@ -552,7 +594,8 @@
    "cena": 85,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "zelena",
@@ -561,7 +604,8 @@
    "cena": 55,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "palenka",
@@ -570,7 +614,8 @@
    "cena": 95,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "premiove",
@@ -579,7 +624,8 @@
    "cena": 125,
    "slozeni": "",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "tramin",
@@ -588,7 +634,8 @@
    "cena": 50,
    "slozeni": "bílé · polosuché · 1 dcl",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "hibernal",
@@ -597,7 +644,8 @@
    "cena": 50,
    "slozeni": "bílé · polosuché · 1 dcl",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "palava",
@@ -606,7 +654,8 @@
    "cena": 60,
    "slozeni": "bílé · polosuché · 1 dcl",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "aurelius",
@@ -615,7 +664,8 @@
    "cena": 60,
    "slozeni": "bílé · polosuché · 1 dcl",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "ryzlink",
@@ -624,7 +674,8 @@
    "cena": 60,
    "slozeni": "bílé · suché · 1 dcl",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "cuvee-pinot",
@@ -633,7 +684,8 @@
    "cena": 60,
    "slozeni": "bílé · suché · 1 dcl",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "syrah-merlot",
@@ -642,7 +694,8 @@
    "cena": 120,
    "slozeni": "červené · 1 dcl",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "zweigeltrebe",
@@ -651,7 +704,8 @@
    "cena": 60,
    "slozeni": "růžové · suché · 1 dcl",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "prosecco",
@@ -660,7 +714,8 @@
    "cena": 60,
    "slozeni": "sekt · suché · 1 dcl",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   },
   {
    "id": "symphony",
@@ -669,7 +724,8 @@
    "cena": 70,
    "slozeni": "sekt · 1 dcl",
    "stitky": [],
-   "objednat": false
+   "objednat": false,
+   "na_uvodu": false
   }
  ]
 }

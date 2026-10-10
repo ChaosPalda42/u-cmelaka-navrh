@@ -32,7 +32,7 @@ export function logo(koren) {
   return `<a class="logo" href="${koren}index.html" aria-label="U Čmeláka – úvod">${logoOdznak({ trida: "logo-znak", id: "lgh", popis: "" })}<span class="logo-text"><span class="logo-bistro">Bistro</span><span><span class="logo-u">U</span> Čmeláka</span></span></a>`;
 }
 
-const I = {
+export const IKONY = {
   pizza: `<path d="M12 2 2.5 20.5a1 1 0 0 0 1.3 1.3L22 12.3A10.5 10.5 0 0 0 12 2z"/><circle cx="10" cy="11" r="1.4"/><circle cx="13.5" cy="15" r="1.4"/><circle cx="8" cy="16.5" r="1.2"/><path d="M5 15.5c3 0 7 2 8.6 5"/>`,
   kosik: `<path d="M3 6h18l-2 11H5z"/><path d="M8 6l3-4M16 6l-3-4"/><circle cx="8" cy="21" r="1.2"/><circle cx="17" cy="21" r="1.2"/>`,
   hodiny: `<circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2.5"/>`,
@@ -60,7 +60,7 @@ const I = {
 };
 
 export function ikona(jmeno, trida = "") {
-  return `<svg class="ik ${trida}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${I[jmeno] || ""}</svg>`;
+  return `<svg class="ik ${trida}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${IKONY[jmeno] || ""}</svg>`;
 }
 
 /** Plástev – šestiúhelník jako dekorace. */

@@ -1,12 +1,12 @@
-/** Sestavení statického webu do out/. Node 24, bez závislostí. */
+/** Sestavení webu do out/ (kořen webu pro PHP hosting). Node 24, bez závislostí.
+ *  Stránky skládá na serveru src/php/sablony.php z uloženého obsahu; tady se jen připraví soubory. */
 import { readFile, writeFile, mkdir, rm, cp, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { stranka, nastavFotky, nastavVerzi } from "./src/templates/layout.mjs";
 import { createHash } from "node:crypto";
-import * as S from "./src/templates/stranky.mjs";
+import { ikona, IKONY, cmelak, plastev } from "./src/templates/ikony.mjs";
 import { logoCmelak, logoOdznak } from "./src/templates/logo.mjs";
 
 const KOREN = path.dirname(fileURLToPath(import.meta.url));
@@ -51,49 +51,44 @@ const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><
 <g transform="translate(200 214) scale(.95) translate(-200 -200)">${logoCmelak({ id: "fav" }).replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g></svg>`;
 
 async function main() {
-  const podnik = JSON.parse(await readFile(path.join(KOREN, "data/podnik.json"), "utf8"));
-  const menu = JSON.parse(await readFile(path.join(KOREN, "data/menu.json"), "utf8"));
-  const { akce: akceData } = JSON.parse(await readFile(path.join(KOREN, "data/akce.json"), "utf8"));
-  const manifestCesta = path.join(KOREN, "src/assets/foto/fotky.json");
-  nastavFotky(existsSync(manifestCesta) ? JSON.parse(await readFile(manifestCesta, "utf8")) : {});
-
-  // Knihovny z Factory použijeme i při sestavení – výpis otevírací doby a české datumy.
-  const O = await import("./src/lib/oteviraci.mjs");
-  const C = await import("./src/lib/cestina.mjs");
-  const tyden = O.tydenRadky(podnik.rozvrh);
-  const akce = akceData.map((a) => ({ ...a, datumCesky: C.datumCesky(a.datum), datumKratce: C.datumKratce(a.datum) }))
-    .sort((a, b) => (a.datum + (a.cas || "")).localeCompare(b.datum + (b.cas || "")));
-  const mapa = (await readFile(path.join(KOREN, "src/assets/mapa.svg"), "utf8")).trim();
-
+  const OUT_INC = path.join(OUT, "inc");
   await rm(OUT, { recursive: true, force: true });
-  await mkdir(path.join(OUT, "assets"), { recursive: true });
+  await mkdir(path.join(OUT_INC, "vychozi"), { recursive: true });
+
+  // statické soubory
   await cp(path.join(KOREN, "src/assets"), path.join(OUT, "assets"), { recursive: true });
   await rm(path.join(OUT, "assets/mapa.svg"), { force: true });
   await writeFile(path.join(OUT, "assets/knihovny.js"), await svazekKnihoven());
   await cp(path.join(KOREN, "src/ui/web.js"), path.join(OUT, "assets/web.js"));
   await writeFile(path.join(OUT, "favicon.svg"), FAVICON);
   await writeFile(path.join(OUT, "assets/logo-u-cmelaka.svg"), logoOdznak({ id: "lg" }).replace("<svg ", '<svg width="800" height="800" '));
-  await writeFile(path.join(OUT, "robots.txt"), "User-agent: *\nDisallow: /\n");
-  await cp(path.join(KOREN, "src/hosting/.htaccess"), path.join(OUT, ".htaccess"));
+  await cp(path.join(KOREN, "src/web"), OUT, { recursive: true });
+
+  // PHP knihovny a šablony
+  for (const f of await readdir(path.join(KOREN, "src/php"))) {
+    if (f.endsWith(".php")) await cp(path.join(KOREN, "src/php", f), path.join(OUT_INC, f));
+  }
+  // výchozí data (dokud majitel v administraci nic neuloží)
+  for (const f of ["podnik", "menu", "akce"]) await cp(path.join(KOREN, "data", f + ".json"), path.join(OUT_INC, "vychozi", f + ".json"));
+  await cp(path.join(KOREN, "src/assets/foto/fotky.json"), path.join(OUT_INC, "vychozi/manifest.json"));
+  // kresby jako JSON pro PHP
+  const logo = logoOdznak({ trida: "%TRIDA%", id: "%ID%", popis: "%POPIS%" }).replace('role="img" aria-label="%POPIS%"', "%ARIA%");
+  const svg = {
+    ikony: Object.fromEntries(Object.keys(IKONY).map((k) => [k, IKONY[k]])),
+    cmelak: cmelak("%TRIDA%"),
+    plastev: plastev("%TRIDA%"),
+    logo,
+    mapa: (await readFile(path.join(KOREN, "src/assets/mapa.svg"), "utf8")).trim(),
+  };
+  await writeFile(path.join(OUT_INC, "vychozi/svg.json"), JSON.stringify(svg));
 
   // otisk verze: změněné styly a skripty se nestáhnou z mezipaměti prohlížeče
   const otisk = createHash("sha1");
-  for (const f of ["assets/style.css", "assets/knihovny.js", "assets/web.js"]) otisk.update(await readFile(path.join(OUT, f)));
-  nastavVerzi(otisk.digest("hex").slice(0, 10));
-  const spolecne = { podnik, tyden, menu };
-  const STRANKY = [
-    ["index.html", "U Čmeláka – bistro, pizza a zahrada v Nové Vsi pod Pleší", "Pizza z pece na vyzvednutí, pivo z čepu, terasa a dětský koutek. Bistro U Čmeláka, Řadová 546, Nová Ves pod Pleší.", S.uvod({ podnik, menu, akce, mapa, tyden }), "str-uvod"],
-    ["menu.html", "Jídelní lístek – U Čmeláka", "Pizza 32 cm na rajčatovém i smetanovém základu, něco k pivu, dorty a káva.", S.menuStranka({ menu }), "str-menu"],
-    ["objednavka.html", "Objednávka na vyzvednutí – U Čmeláka", "Objednejte pizzu s sebou a vyberte si čas vyzvednutí.", S.objednavkaStranka({ podnik }), "str-objednavka"],
-    ["zahrada.html", "Zahrada a děti – U Čmeláka", "Terasa pod světýlky, dětský koutek na dohled od stolů, oslavy na zahradě.", S.zahradaStranka({ podnik }), "str-zahrada"],
-    ["akce.html", "Akce a oslavy – U Čmeláka", "Koncerty, kvízy, odpoledne pro děti a oslavy na zahradě.", S.akceStranka({ akce }), "str-akce"],
-    ["kontakt.html", "Kontakt – U Čmeláka", "Řadová 546, Nová Ves pod Pleší. Otevírací doba, telefon a mapa.", S.kontaktStranka({ podnik, mapa, tyden }), "str-kontakt"],
-    ["404.html", "Stránka nenalezena – U Čmeláka", "Tady čmelák nic nenašel.", S.chybaStranka(), "str-404"],
-  ];
-  for (const [soubor, titulek, popis, obsah, trida] of STRANKY) {
-    await writeFile(path.join(OUT, soubor), stranka({ ...spolecne, titulek, popis, obsah, trida, aktivni: soubor }));
-  }
-  console.log(`out/: ${STRANKY.length} stránek`);
+  for (const f of ["assets/style.css", "assets/knihovny.js", "assets/web.js", "assets/admin.css", "assets/admin.js"]) otisk.update(await readFile(path.join(OUT, f)));
+  const verze = otisk.digest("hex").slice(0, 10);
+  await writeFile(path.join(OUT_INC, "verze.php"), `<?php\nconst CM_VERZE = ${JSON.stringify(verze)};\n`);
+  await writeFile(path.join(OUT_INC, ".htaccess"), "Require all denied\n");
+  console.log(`out/: PHP web, verze ${verze}`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });
