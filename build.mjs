@@ -74,6 +74,7 @@ async function main() {
   await writeFile(path.join(OUT, "favicon.svg"), FAVICON);
   await writeFile(path.join(OUT, "assets/logo-u-cmelaka.svg"), logoOdznak({ id: "lg" }).replace("<svg ", '<svg width="800" height="800" '));
   await writeFile(path.join(OUT, "robots.txt"), "User-agent: *\nDisallow: /\n");
+  await cp(path.join(KOREN, "src/hosting/.htaccess"), path.join(OUT, ".htaccess"));
 
   // otisk verze: změněné styly a skripty se nestáhnou z mezipaměti prohlížeče
   const otisk = createHash("sha1");
