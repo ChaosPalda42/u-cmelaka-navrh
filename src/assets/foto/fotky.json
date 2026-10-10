@@ -1,0 +1,96 @@
+{
+ "cmelak": {
+  "sirka": 1536,
+  "varianty": [
+   640,
+   1280,
+   1536
+  ],
+  "vyska": 1024
+ },
+ "detsky-koutek": {
+  "sirka": 1536,
+  "varianty": [
+   640,
+   1280,
+   1536
+  ],
+  "vyska": 1024
+ },
+ "kava-dort": {
+  "sirka": 1024,
+  "varianty": [
+   640,
+   1024
+  ],
+  "vyska": 1024
+ },
+ "koncert": {
+  "sirka": 1536,
+  "varianty": [
+   640,
+   1280,
+   1536
+  ],
+  "vyska": 1024
+ },
+ "krabice": {
+  "sirka": 1024,
+  "varianty": [
+   640,
+   1024
+  ],
+  "vyska": 1024
+ },
+ "oslava": {
+  "sirka": 1536,
+  "varianty": [
+   640,
+   1280,
+   1536
+  ],
+  "vyska": 1024
+ },
+ "pec": {
+  "sirka": 1024,
+  "varianty": [
+   640,
+   1024
+  ],
+  "vyska": 1024
+ },
+ "pivo": {
+  "sirka": 1024,
+  "varianty": [
+   640,
+   1024
+  ],
+  "vyska": 1024
+ },
+ "pizza": {
+  "sirka": 1536,
+  "varianty": [
+   640,
+   1280,
+   1536
+  ],
+  "vyska": 1024
+ },
+ "pizza-smetana": {
+  "sirka": 1024,
+  "varianty": [
+   640,
+   1024
+  ],
+  "vyska": 1024
+ },
+ "terasa": {
+  "sirka": 1536,
+  "varianty": [
+   640,
+   1280,
+   1536
+  ],
+  "vyska": 1024
+ }
+}
