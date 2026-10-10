@@ -1,0 +1,13 @@
+{
+  "id": "C-002",
+  "file": "src/lib/kosik.mjs",
+  "role": "coder",
+  "title": "Košík objednávky na vyzvednutí",
+  "interface": "Řádek košíku = { klic, id, pocet, priplatky } (přesně tyto čtyři klíče v tomto pořadí). Košík = pole řádků.\nPoložka menu = { id, nazev, cena, kategorie, … }; příplatek = { id, nazev, cena }. Ceny jsou celé koruny.\nMAX = 20 kusů na řádek.\n\nexport function klicRadku(id, priplatky) -> string\n  id + \"|\" + seřazené (sort() řetězců) id příplatků spojené čárkou. Chybějící/prázdné příplatky -> id + \"|\".\n\nexport function pridej(kosik, id, volby = {}) -> kosik\n  volby.pocet (výchozí 1) se ořízne Math.floor; když je < 1, vrať kopii košíku beze změny.\n  volby.priplatky (výchozí []) se uloží seřazené. Existuje-li řádek se stejným klíčem, zvýší se jeho pocet,\n  jinak se přidá nový řádek na konec. pocet nikdy nepřekročí MAX.\n\nexport function zmenPocet(kosik, klic, pocet) -> kosik\n  pocet <= 0 -> řádek se odebere; jinak min(Math.floor(pocet), MAX). Neznámý klíč -> kopie beze změny.\n\nexport function odeber(kosik, klic) -> kosik\n\nexport function souhrn(kosik, menu, priplatky, volby = {}) -> { radky, pocetKusu, pocetPizz, mezisoucet, obaly, celkem }\n  volby.krabice = cena krabice za kus pizzy (výchozí 0).\n  Řádek, jehož id není v menu, se vynechá úplně. Neznámé id příplatku se ignoruje (ani název, ani cena).\n  radky: { klic, id, nazev, pocet, priplatky: [názvy známých příplatků v pořadí řádku], jednotkova: cena + součet cen\n  známých příplatků, celkem: jednotkova * pocet } — v pořadí košíku, přesně tyto klíče v tomto pořadí.\n  pocetKusu = součet pocet; pocetPizz = součet pocet řádků s kategorie === \"pizza\";\n  mezisoucet = součet celkem; obaly = pocetPizz * krabice; celkem = mezisoucet + obaly.\n\nexport function serializuj(kosik) -> string   (JSON.stringify)\n\nexport function nactiKosik(text) -> kosik\n  Odolné načtení (např. z localStorage). Neplatný JSON, null, prázdný text nebo jiný typ než pole -> [].\n  Z pole se vezmou jen objekty s neprázdným řetězcem id a s pocet, který je celé číslo >= 1\n  (Number.isInteger; 1.5 nebo 0 se zahodí). pocet > MAX se ořízne na MAX. priplatky, které nejsou pole,\n  -> []; jinak jen řetězce, seřazené. klic se vždy přepočítá. Řádky se stejným klíčem se sloučí\n  (sečte se pocet, strop MAX) na místě prvního výskytu.",
+  "uses": {},
+  "acceptance": "tests/test_kosik.py",
+  "notes": "ESM modul. Musí běžet v Node 24 i v prohlížeči: žádné `require`, žádné Node API (fs, path, process), žádné DOM API (document, window, localStorage). Jen čistý JavaScript a standardní vestavěné objekty (Intl je povolené). Bez závislostí, bez buildu. Všechny funkce jsou čisté: vstupní pole ani objekty se nikdy nemutují.",
+  "budget": {
+    "iterations": 12
+  }
+}

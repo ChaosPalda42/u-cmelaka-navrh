@@ -1,0 +1,13 @@
+{
+  "id": "C-004",
+  "file": "src/lib/menu.mjs",
+  "role": "coder",
+  "title": "Jídelní lístek – hledání, filtry, seskupení, formát cen",
+  "interface": "Položka = { id, nazev, kategorie, slozeni, stitky: [..], alergeny: [čísla], … }.\n\nexport function bezDiakritiky(text) -> string\n  normalize(\"NFD\"), odstranit znaky U+0300–U+036F, toLowerCase(). undefined/null -> \"\".\n\nexport function filtruj(polozky, f = {}) -> položky (původní objekty, původní pořadí)\n  f.hledat: po bezDiakritiky a trim rozdělit na slova podle mezer; KAŽDÉ slovo musí být podřetězcem\n  bezDiakritiky(nazev + \" \" + slozeni). Prázdné hledání = bez omezení.\n  f.kategorie: neprázdný řetězec -> jen položky té kategorie; \"\" nebo chybí = všechny.\n  f.stitky: položka musí mít VŠECHNY uvedené štítky.\n  f.bezAlergenu: položka nesmí mít ŽÁDNÝ z uvedených alergenů.\n  f chybí úplně -> vrať všechny.\n\nexport function seskup(polozky, poradi) -> [{ kategorie, polozky }]\n  Nejdřív kategorie v pořadí podle `poradi` (prázdné vynechat), pak kategorie, které v `poradi` nejsou,\n  v pořadí jejich prvního výskytu. Položky uvnitř skupiny v původním pořadí.\n\nexport function formatCena(kc) -> string\n  Celé číslo s tisíci oddělenými nezlomitelnou mezerou U+00A0 a za ním U+00A0 + \"Kč\": 1250 -> \"1\\u00a0250\\u00a0Kč\".\n\nexport function alergenyText(cisla) -> string\n  Unikátní čísla seřazená číselně, spojená \", \". Prázdné/undefined -> \"\".",
+  "uses": {},
+  "acceptance": "tests/test_menu.py",
+  "notes": "ESM modul. Musí běžet v Node 24 i v prohlížeči: žádné `require`, žádné Node API (fs, path, process), žádné DOM API (document, window, localStorage). Jen čistý JavaScript a standardní vestavěné objekty (Intl je povolené). Bez závislostí, bez buildu. Všechny funkce jsou čisté: vstupní pole ani objekty se nikdy nemutují.",
+  "budget": {
+    "iterations": 10
+  }
+}

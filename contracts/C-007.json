@@ -1,0 +1,13 @@
+{
+  "id": "C-007",
+  "file": "tools/fotky.py",
+  "role": "coder",
+  "title": "Zmenšené varianty fotek pro web (webp + jpg) a manifest",
+  "interface": "Python 3.11, standardní knihovna + Pillow. Modul jde naimportovat bez vedlejších účinků. Spuštění\n`python -m tools.fotky` zpracuje zdroje/fotky -> src/assets/foto se šířkami [640, 1280, 1920] a poměry POMERY\n(POMERY = {} jako modulová konstanta, slovník jméno -> poměr šířka/výška).\n\ndef sirky_variant(sirka: int, sirky: list[int]) -> list[int]\n    Šířky z `sirky` menší než `sirka`, vzestupně; pak navíc sama `sirka`, pokud v seznamu ještě není a je menší\n    než největší požadovaná šířka nebo rovna některé z nich. Prakticky: [w for w in sirky if w < sirka] + [sirka],\n    ale když je sirka > max(sirky), místo ní se přidá max(sirky). Bez duplicit, vzestupně.\n    (3000 -> [640,1280,1920]; 1536 -> [640,1280,1536]; 1280 -> [640,1280]; 500 s [640,1280] -> [500])\n\ndef vyrez_na_pomer(img, pomer: float | None) -> Image\n    None -> img beze změny. Jinak středový ořez na co největší výřez s poměrem šířka/výška = pomer:\n    je-li img širší než pomer, nová šířka = round(vyska * pomer), výška zůstane; jinak nová výška = round(sirka / pomer).\n\ndef zpracuj(zdroj, cil, sirky=[640, 1280, 1920], pomery=None) -> dict\n    Projde soubory v `zdroj` s příponou .png/.jpg/.jpeg/.webp (jiné ignoruje), seřazené podle jména.\n    Jméno = název bez přípony. Obrázek -> RGB -> vyrez_na_pomer(pomery.get(jméno)) -> pro každou šířku w ze\n    sirky_variant(šířka výřezu, sirky) uloží `cil/{jméno}-{w}.webp` (quality 80) a `cil/{jméno}-{w}.jpg`\n    (quality 82, progressive) zmenšené na (w, round(w * vyska / sirka)) filtrem LANCZOS.\n    Soubor, který už existuje a je novější (mtime) než zdroj, se znovu nezapisuje.\n    Vrací manifest { jméno: { \"sirka\": šířka výřezu, \"vyska\": výška výřezu, \"varianty\": [šířky] } } a zapíše ho\n    i do `cil/fotky.json` (json, ensure_ascii=False, indent=1, klíče seřazené). Adresář `cil` vytvoří.",
+  "uses": {},
+  "acceptance": "tests/test_fotky.py",
+  "notes": "Žádné numpy. Test si obrázky vyrábí sám v tmp_path.",
+  "budget": {
+    "iterations": 10
+  }
+}

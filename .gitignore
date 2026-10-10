@@ -4,3 +4,8 @@ __pycache__/
 .pytest_cache/
 .factory-runtime/
 *.db
+zdroje/fotky/
+out/
+_balicek/
+.venv/
+__pycache__/

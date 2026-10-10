@@ -1,0 +1,13 @@
+{
+  "id": "C-005",
+  "file": "src/lib/cestina.mjs",
+  "role": "coder",
+  "title": "Čeština – skloňování podle čísla, česká data, nadcházející akce",
+  "interface": "Datum je vždy řetězec \"YYYY-MM-DD\". Počítej v UTC (new Date(Date.UTC(r, m-1, d))), aby nezáleželo na časovém pásmu stroje.\n\nexport function sklonuj(n, tvary) -> string\n  tvary = [1, 2–4, 5+]. Podle |n|: 1 -> tvary[0]; 2..4 -> tvary[1]; jinak (0, 5+, 11, 21, 22 …) tvary[2].\n  Výsledek `${n} ${tvar}` (např. \"-3 pizzy\", \"21 pizz\").\n\nexport function datumCesky(datum) -> \"sobota 17. října\"\n  Dny: [\"pondělí\",\"úterý\",\"středa\",\"čtvrtek\",\"pátek\",\"sobota\",\"neděle\"] (pondělí = první).\n  Měsíce v 2. pádě: [\"ledna\",\"února\",\"března\",\"dubna\",\"května\",\"června\",\"července\",\"srpna\",\"září\",\"října\",\"listopadu\",\"prosince\"].\n  Den v měsíci bez nuly zleva.\n\nexport function datumKratce(datum) -> \"so 17. 10.\"\n  Zkratky [\"po\",\"út\",\"st\",\"čt\",\"pá\",\"so\",\"ne\"], den a měsíc bez nul zleva, za každým tečka, mezi nimi mezera.\n\nexport function zaDni(dnes, datum) -> string\n  n = rozdíl ve dnech (datum - dnes). n < 0 -> \"proběhlo\"; 0 -> \"dnes\"; 1 -> \"zítra\";\n  jinak \"za \" + sklonuj(n, [\"den\",\"dny\",\"dní\"]). Přechod letního času nesmí rozdíl rozbít.\n\nexport function nadchazejici(akce, dnes, limit) -> akce\n  Akce = { datum, cas?, … }. Jen akce s datum >= dnes, seřazené podle datum, pak podle cas (chybějící cas = \"99:99\",\n  tedy na konec dne). Stabilní řazení. limit (volitelný) = nejvýš tolik položek. Vrací původní objekty.",
+  "uses": {},
+  "acceptance": "tests/test_cestina.py",
+  "notes": "ESM modul. Musí běžet v Node 24 i v prohlížeči: žádné `require`, žádné Node API (fs, path, process), žádné DOM API (document, window, localStorage). Jen čistý JavaScript a standardní vestavěné objekty (Intl je povolené). Bez závislostí, bez buildu. Všechny funkce jsou čisté: vstupní pole ani objekty se nikdy nemutují.",
+  "budget": {
+    "iterations": 10
+  }
+}

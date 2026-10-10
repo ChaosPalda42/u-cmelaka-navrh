@@ -1,0 +1,13 @@
+{
+  "id": "C-003",
+  "file": "src/lib/vyzvednuti.mjs",
+  "role": "coder",
+  "title": "Časy vyzvednutí objednávky podle otevírací doby a kapacity kuchyně",
+  "interface": "Rozvrh = pole 7 položek, index 0 = pondělí … 6 = neděle. Položka je buď null (zavřeno), nebo { od: \"HH:MM\", do: \"HH:MM\" } (od < do, nikdy přes půlnoc). Časy se počítají v minutách od půlnoci.\n\nexport function dobaPripravy(pocetPizz) -> number\n  20 + 5 * Math.ceil(Math.max(0, pocetPizz - 2) / 2)   (0–2 pizzy 20 min, 3–4 25 min, 5–6 30 min, …)\n\nexport function sloty(rozvrh, den, minuty, volby = {}) -> [{ cas, minuty, volno, dostupny }]\n  volby: pocetPizz (výchozí 0), krok (15), kapacita (6 pizz na slot), rezerva (15), obsazeno ({ \"HH:MM\": počet pizz }, výchozí {}).\n  rozvrh[den] null -> [].\n  start = Math.max(minuty, naMinuty(od)) + dobaPripravy(pocetPizz), zaokrouhleno NAHORU na násobek krok\n  (Math.ceil(start / krok) * krok). posledni = naMinuty(do) - rezerva.\n  Sloty od start po krocích, dokud m <= posledni. cas = \"HH:MM\", volno = Math.max(0, kapacita - (obsazeno[cas] || 0)),\n  dostupny = volno >= pocetPizz. Klíče objektu přesně v pořadí cas, minuty, volno, dostupny.\n  Žádný slot -> [].\n\nexport function nejblizsi(seznam) -> slot | null\n  První slot s dostupny === true, jinak null.\n\nexport function obsazenost(objednavky) -> { \"HH:MM\": počet }\n  objednavky = [{ cas, pizz }]. Sečte pizz (chybí -> 0) podle cas; položky s prázdným nebo chybějícím cas se vynechají.\n\nPomocné převody \"HH:MM\" <-> minuty si napiš v modulu (žádné importy).",
+  "uses": {},
+  "acceptance": "tests/test_vyzvednuti.py",
+  "notes": "ESM modul. Musí běžet v Node 24 i v prohlížeči: žádné `require`, žádné Node API (fs, path, process), žádné DOM API (document, window, localStorage). Jen čistý JavaScript a standardní vestavěné objekty (Intl je povolené). Bez závislostí, bez buildu. Všechny funkce jsou čisté: vstupní pole ani objekty se nikdy nemutují.",
+  "budget": {
+    "iterations": 12
+  }
+}
