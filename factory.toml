@@ -1,0 +1,11 @@
+# Factory v2: nastavení projektu.
+#
+# Role se neuvádějí schválně - berou se z harnessu (src/factory/config.py),
+# kde je vždycky to, co je změřené a co na tomhle stroji opravdu běží.
+# Vlastní [roles.*] si přidej, jen když pro tenhle projekt něco změříš
+# (`factory bench`); opsaná jména modelů zastarají a běh se pak protlouká
+# přes retry role, aniž by bylo poznat proč.
+[run]
+test_command = ['uv', 'run', 'pytest', '-q']
+iterations_per_contract = 12
+max_run_iterations = 400
