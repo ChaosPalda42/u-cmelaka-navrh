@@ -1,6 +1,7 @@
 /** Obsah jednotlivých stránek. Texty jsou návrh – menu, ceny a akce jsou smyšlené. */
 import { esc, foto } from "./layout.mjs";
 import { ikona, cmelak, plastev } from "./ikony.mjs";
+import { logoOdznak } from "./logo.mjs";
 
 const fmtKc = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " Kč";
 
@@ -56,7 +57,7 @@ export function uvod({ podnik, menu, akce, mapa, tyden }) {
   </div>
   <div class="hero-obraz">
     <div class="hero-blob">${foto("terasa", "Terasa za podvečera: dřevěné stoly, světýlka, rodiny u pizzy", { sizes: "(min-width: 900px) 55vw, 100vw", eager: true })}</div>
-    <div class="hero-cedule" aria-hidden="true"><span>Od roku</span><strong>${podnik.od_roku}</strong></div>
+    <div class="hero-cedule" aria-hidden="true">${logoOdznak({ id: "lgo", popis: "" })}</div>
   </div>
   <svg class="let" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true"><path data-let-cesta d="M1180 70 C 1000 -20, 860 160, 960 210 S 1150 150, 1010 300 S 640 260, 560 360 S 380 520, 250 470"/></svg>
   <div class="letec" data-letec aria-hidden="true">${cmelak("letec-cmelak")}</div>

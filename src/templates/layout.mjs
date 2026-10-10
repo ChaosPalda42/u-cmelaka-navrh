@@ -1,5 +1,6 @@
 /** Kostra stránky: hlavička, navigace, patička. */
 import { logo, ikona, cmelak } from "./ikony.mjs";
+import { logoOdznak } from "./logo.mjs";
 
 export const NAV = [
   ["index.html", "Úvod"],
@@ -47,7 +48,7 @@ function paticka(podnik, koren, tyden) {
   return `<footer class="paticka">
   <div class="paticka-in">
     <div class="paticka-znacka">
-      ${cmelak("paticka-cmelak")}
+      ${logoOdznak({ trida: "paticka-logo", id: "lgf" })}
       <p class="paticka-motto">Bzučíme v Nové Vsi pod Pleší<br>od roku ${podnik.od_roku}.</p>
     </div>
     <div>

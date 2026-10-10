@@ -1,3 +1,4 @@
+import { logoOdznak } from "./logo.mjs";
 /** Maskot čmelák a drobné ikony. Barvy nese CSS (currentColor a proměnné), takže sedí ve světlém i tmavém režimu. */
 
 /** Čmelák zboku: chlupaté tělo s pruhy, křídla mávají (třída .cm-kridla), tykadla. */
@@ -28,7 +29,7 @@ export function cmelak(trida = "", popis = "") {
 
 /** Logo: čmelák + jméno. */
 export function logo(koren) {
-  return `<a class="logo" href="${koren}index.html" aria-label="U Čmeláka – úvod">${cmelak("logo-cmelak")}<span class="logo-text"><span class="logo-u">U</span> Čmeláka</span></a>`;
+  return `<a class="logo" href="${koren}index.html" aria-label="U Čmeláka – úvod">${logoOdznak({ trida: "logo-znak", id: "lgh", popis: "" })}<span class="logo-text"><span class="logo-bistro">Bistro</span><span><span class="logo-u">U</span> Čmeláka</span></span></a>`;
 }
 
 const I = {

@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import { stranka, nastavFotky } from "./src/templates/layout.mjs";
 import * as S from "./src/templates/stranky.mjs";
+import { logoCmelak, logoOdznak } from "./src/templates/logo.mjs";
 
 const KOREN = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(KOREN, "out");
@@ -45,12 +46,8 @@ async function svazekKnihoven() {
   return `(function (global) {\n"use strict";\nvar CM = global.CM = global.CM || {};\n${kusy.join("\n")}\n})(typeof window !== "undefined" ? window : globalThis);\n`;
 }
 
-const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-<rect width="32" height="32" rx="9" fill="#f2b21b"/>
-<ellipse cx="13" cy="9" rx="5" ry="6.5" fill="#fff" opacity=".85" transform="rotate(-25 13 9)"/>
-<ellipse cx="17.5" cy="19" rx="10" ry="7.5" fill="#2a1f14"/>
-<path d="M13 12.2q-2.6 6.8 0 13.6h3.4q-2.4-6.8 0-13.6z M20 11.8q2.4 7 0 14.2l3-.8q2.2-6.6 0-12.8z" fill="#f2b21b"/>
-<circle cx="8.5" cy="19" r="4.6" fill="#2a1f14"/><circle cx="7" cy="18" r="1.1" fill="#fff"/></svg>`;
+const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="198" fill="#2a1f14"/><circle cx="200" cy="200" r="172" fill="#efe2c4"/>
+<g transform="translate(200 214) scale(.95) translate(-200 -200)">${logoCmelak({ id: "fav" }).replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g></svg>`;
 
 async function main() {
   const podnik = JSON.parse(await readFile(path.join(KOREN, "data/podnik.json"), "utf8"));
@@ -74,6 +71,7 @@ async function main() {
   await writeFile(path.join(OUT, "assets/knihovny.js"), await svazekKnihoven());
   await cp(path.join(KOREN, "src/ui/web.js"), path.join(OUT, "assets/web.js"));
   await writeFile(path.join(OUT, "favicon.svg"), FAVICON);
+  await writeFile(path.join(OUT, "assets/logo-u-cmelaka.svg"), logoOdznak({ id: "lg" }).replace("<svg ", '<svg width="800" height="800" '));
   await writeFile(path.join(OUT, "robots.txt"), "User-agent: *\nDisallow: /\n");
 
   const spolecne = { podnik, tyden, menu };
