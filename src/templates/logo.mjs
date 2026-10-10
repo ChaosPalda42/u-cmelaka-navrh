@@ -86,7 +86,7 @@ function cmelak() {
 export function logoOdznak({ trida = "", id = "lg", popis = "U Čmeláka – logo" } = {}) {
   const prkna = [70, 112, 154, 196, 238, 280, 322].map((x) => `<path d="M${x} 40 V 360" stroke="#c9b48c" stroke-width="2.5" opacity=".7"/>`).join("") +
     `<path d="M60 150 H 112 M154 112 H 196 M238 132 H 280 M112 276 H 154 M280 250 H 330 M196 340 H 238" stroke="#c9b48c" stroke-width="2.5" opacity=".7"/>`;
-  return `<svg class="logo-odznak ${trida}" viewBox="0 0 400 400" ${popis ? `role="img" aria-label="${popis}"` : `aria-hidden="true" focusable="false"`} xmlns="http://www.w3.org/2000/svg">
+  return `<svg class="logo-odznak ${trida}" width="400" height="400" viewBox="0 0 400 400" ${popis ? `role="img" aria-label="${popis}"` : `aria-hidden="true" focusable="false"`} xmlns="http://www.w3.org/2000/svg">
 <defs>
   <clipPath id="${id}-vnitrek"><circle cx="200" cy="208" r="150"/></clipPath>
   <path id="${id}-oblouk" d="M 38 200 A 162 162 0 0 1 362 200"/>

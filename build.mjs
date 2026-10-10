@@ -4,7 +4,8 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { stranka, nastavFotky } from "./src/templates/layout.mjs";
+import { stranka, nastavFotky, nastavVerzi } from "./src/templates/layout.mjs";
+import { createHash } from "node:crypto";
 import * as S from "./src/templates/stranky.mjs";
 import { logoCmelak, logoOdznak } from "./src/templates/logo.mjs";
 
@@ -74,6 +75,10 @@ async function main() {
   await writeFile(path.join(OUT, "assets/logo-u-cmelaka.svg"), logoOdznak({ id: "lg" }).replace("<svg ", '<svg width="800" height="800" '));
   await writeFile(path.join(OUT, "robots.txt"), "User-agent: *\nDisallow: /\n");
 
+  // otisk verze: změněné styly a skripty se nestáhnou z mezipaměti prohlížeče
+  const otisk = createHash("sha1");
+  for (const f of ["assets/style.css", "assets/knihovny.js", "assets/web.js"]) otisk.update(await readFile(path.join(OUT, f)));
+  nastavVerzi(otisk.digest("hex").slice(0, 10));
   const spolecne = { podnik, tyden, menu };
   const STRANKY = [
     ["index.html", "U Čmeláka – bistro, pizza a zahrada v Nové Vsi pod Pleší", "Pizza z pece na vyzvednutí, pivo z čepu, terasa a dětský koutek. Bistro U Čmeláka, Řadová 546, Nová Ves pod Pleší.", S.uvod({ podnik, menu, akce, mapa, tyden }), "str-uvod"],

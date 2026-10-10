@@ -77,6 +77,9 @@ function paticka(podnik, koren, tyden) {
 </footer>`;
 }
 
+let VERZE = "";
+export function nastavVerzi(v) { VERZE = v; }
+
 export function stranka({ titulek, popis, aktivni, obsah, koren = "", podnik, tyden, menu, trida = "", skripty = "" }) {
   return `<!doctype html>
 <html lang="cs">
@@ -90,7 +93,7 @@ export function stranka({ titulek, popis, aktivni, obsah, koren = "", podnik, ty
 <meta name="theme-color" content="#1c150e" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="${koren}favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${koren}assets/fonts/fraunces-normal-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${koren}assets/style.css">
+<link rel="stylesheet" href="${koren}assets/style.css?v=${VERZE}">
 <script>try{var t=localStorage.getItem("cm-tema");if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
 </head>
 <body class="${trida}">
@@ -101,8 +104,8 @@ ${obsah}
 </main>
 ${paticka(podnik, koren, tyden)}
 <script>window.CM_DATA = ${JSON.stringify({ rozvrh: podnik.rozvrh, krabice: podnik.krabice, koren, menu: { polozky: menu.polozky.filter((p) => p.objednat).map(({ id, nazev, cena, kategorie, slozeni }) => ({ id, nazev, cena, kategorie, slozeni })), priplatky: menu.priplatky } }).replace(/</g, "\\u003c")};</script>
-<script src="${koren}assets/knihovny.js"></script>
-<script src="${koren}assets/web.js"></script>
+<script src="${koren}assets/knihovny.js?v=${VERZE}"></script>
+<script src="${koren}assets/web.js?v=${VERZE}"></script>
 ${skripty}
 </body>
 </html>
