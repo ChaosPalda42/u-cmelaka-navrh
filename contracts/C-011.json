@@ -1,0 +1,17 @@
+{
+  "id": "C-011",
+  "file": "src/php/pomoc.php",
+  "role": "coder",
+  "title": "Pomocníci pro stránky v PHP (stejný výstup jako JS moduly)",
+  "interface": "Převod pomocníků z JS do PHP; test volá JS i PHP se stejnými vstupy a výsledky musí být STEJNÉ.\nfunction cm_format_cena(int $kc): string     – jako formatCena: tisíce oddělené U+00A0, pak U+00A0 a \"Kč\".\nfunction cm_tyden_radky(array $rozvrh): array – jako tydenRadky: [[\"dny\" => …, \"cas\" => …], …], pomlčka U+2013 s mezerami.\nfunction cm_datum_cesky(string $d): string   – jako datumCesky (\"sobota 17. října\").\nfunction cm_datum_kratce(string $d): string  – jako datumKratce (\"so 17. 10.\").\nfunction cm_sklonuj(int $n, array $tvary): string – jako sklonuj.\nfunction cm_e($v): string\n  htmlspecialchars((string) $v, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, \"UTF-8\"); null -> \"\".\nfunction cm_text_html(string $t): string\n  Text z administrace na HTML: nejdřív cm_e, pak každé *něco* (regex /\\*([^*\\n]+)\\*/u) -> <em>něco</em>, pak \\n -> <br>.\nfunction cm_tel(string $telefon): string – \"tel:\" + telefon bez mezer; prázdný -> \"\".",
+  "uses": {
+    "src/lib/menu.mjs": "formatCena – vzor (tisíce i Kč odděluje U+00A0)",
+    "src/lib/oteviraci.mjs": "tydenRadky – vzor",
+    "src/lib/cestina.mjs": "datumCesky, datumKratce, sklonuj – vzor"
+  },
+  "acceptance": "tests/test_pomoc_php.py",
+  "notes": "PHP 8.5 soubor bez knihoven a bez composeru (hosting má holé PHP s rozšířeními gd, exif, mbstring, intl, json, imagick). Načtení souboru (require) nesmí mít vedlejší účinky: žádný výpis, žádná relace, žádný zápis – jen definice funkcí a konstant. Žádné třídy nejsou potřeba, stačí funkce s prefixem cm_. declare(strict_types=1) NEPOUŽÍVEJ (test předává čísla i jako řetězce). Funkce nikdy nevyhazují výjimky ven; chyby vrací hodnotou. Test: tests/phpmod.py volá funkce přes php -r a výsledek čte jako JSON (asociativní pole = objekt, seznam = pole, null = None).",
+  "budget": {
+    "iterations": 10
+  }
+}
