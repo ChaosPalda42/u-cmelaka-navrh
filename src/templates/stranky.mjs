@@ -4,7 +4,7 @@ import { ikona, cmelak, plastev } from "./ikony.mjs";
 
 const fmtKc = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " Kč";
 
-const STITKY = { vege: "bez masa", palive: "pálivá", smetana: "smetanový základ", deti: "pro děti", specialita: "specialita domu" };
+const STITKY = { vege: "bez masa", palive: "pálivá", smetana: "smetanový základ" };
 
 function stitkyHtml(p) {
   return (p.stitky || []).map((s) => `<span class="stitek stitek-${s}">${STITKY[s] || s}</span>`).join("");
@@ -16,9 +16,9 @@ export function kartaJidla(p, { koren = "", velka = false } = {}) {
     ? `<button class="pridat" type="button" data-pridat="${p.id}" aria-label="Přidat ${esc(p.nazev)} do košíku">${ikona("plus")}<span>Přidat</span></button>`
     : `<span class="jen-na-miste" title="Podáváme jen na místě">jen u nás</span>`;
   return `<article class="jidlo${velka ? " jidlo-velke" : ""}" data-jidlo="${p.id}">
-  <div class="jidlo-hlava"><h3 class="jidlo-nazev">${esc(p.nazev)}</h3><span class="tecky" aria-hidden="true"></span><span class="jidlo-cena">${fmtKc(p.cena)}</span></div>
+  <div class="jidlo-hlava">${p.cislo ? `<span class="jidlo-cislo" aria-hidden="true">${p.cislo}</span>` : ""}<h3 class="jidlo-nazev">${esc(p.nazev)}</h3><span class="tecky" aria-hidden="true"></span><span class="jidlo-cena">${p.cena == null ? "dle nabídky" : fmtKc(p.cena)}</span></div>
   ${p.slozeni ? `<p class="jidlo-slozeni">${esc(p.slozeni)}</p>` : ""}
-  <div class="jidlo-pata"><div class="stitky">${stitkyHtml(p)}${p.alergeny?.length ? `<span class="alergeny" title="Alergeny">A: ${[...new Set(p.alergeny)].sort((a, b) => a - b).join(", ")}</span>` : ""}</div>${tlacitko}</div>
+  <div class="jidlo-pata"><div class="stitky">${stitkyHtml(p)}</div>${tlacitko}</div>
 </article>`;
 }
 
@@ -38,13 +38,13 @@ function akceKarta(a, koren, { fotka = true } = {}) {
 /* ---------------------------------------------------------------- úvod */
 export function uvod({ podnik, menu, akce, mapa, tyden }) {
   const k = "";
-  const oblibene = ["cmelak", "margherita", "diabolo", "spenatova"].map((id) => menu.polozky.find((p) => p.id === id));
+  const oblibene = ["margherita", "capricciosa", "messicana", "quattro-formaggi"].map((id) => menu.polozky.find((p) => p.id === id));
   return `
 <section class="hero">
   <div class="hero-text">
     <p class="nadtitul">Bistro · pizzerie · kavárna v Nové Vsi pod Pleší</p>
     <h1>Pizza z pece, pivo z čepu a <span class="nezlomit"><em>zahrada</em>,</span> kde si děti hrají.</h1>
-    <p class="perex">U Čmeláka se zastavíte na kafe a dort, na pivo po práci nebo na celé odpoledne s dětmi. A když nemáte čas sedět, upečeme vám pizzu s sebou.</p>
+    <p class="perex">U Čmeláka se zastavíte na kafe, na Pilsner po práci nebo na celé odpoledne s dětmi. A když nemáte čas sedět, upečeme vám pizzu s sebou.</p>
     <div class="tlacitka">
       <a class="btn btn-med" href="objednavka.html" data-pristani>${ikona("pizza")}Objednat na vyzvednutí</a>
       <a class="btn btn-obrys" href="menu.html">Jídelní lístek</a>
@@ -88,7 +88,7 @@ export function uvod({ podnik, menu, akce, mapa, tyden }) {
     <ul class="vycet">
       <li>${ikona("dite")}Dětský koutek přímo u stolů</li>
       <li>${ikona("strom")}Terasa se stínem a světýlky</li>
-      <li>${ikona("zidle")}Vysoké židličky a dětská pizza</li>
+      <li>${ikona("zidle")}Domácí limonády a pítíčko pro děti</li>
       <li>${ikona("wifi")}Wi-Fi a bezbariérový vstup</li>
     </ul>
     <a class="odkaz-sipka" href="zahrada.html">Jak to u nás vypadá ${ikona("sipka")}</a>
@@ -97,11 +97,11 @@ export function uvod({ podnik, menu, akce, mapa, tyden }) {
 
 <section class="pas pas-listek" aria-labelledby="listek-h">
   <div class="sekce-hlava sekce-hlava-radek">
-    <div><p class="nadtitul">Z lístku</p><h2 id="listek-h">Co se u nás peče nejčastěji</h2></div>
+    <div><p class="nadtitul">Z lístku</p><h2 id="listek-h">Pizzy z naší pece</h2></div>
     <a class="odkaz-sipka" href="menu.html">Celý jídelní lístek ${ikona("sipka")}</a>
   </div>
   <div class="listek-uvod">
-    <div class="listek-foto">${foto("pizza", "Pizza se salámem a bazalkou na dřevěném prkénku", { sizes: "(min-width: 900px) 40vw, 100vw" })}<p class="listek-foto-pozn">32 cm · rajčatový nebo smetanový základ</p></div>
+    <div class="listek-foto">${foto("pizza", "Pizza se salámem a bazalkou na dřevěném prkénku", { sizes: "(min-width: 900px) 40vw, 100vw" })}<p class="listek-foto-pozn">32 cm · tomatový nebo smetanový základ</p></div>
     <div class="listek-karty">${oblibene.map((p) => kartaJidla(p, { koren: k })).join("")}</div>
   </div>
 </section>
@@ -150,8 +150,8 @@ export function menuStranka({ menu }) {
   return `
 <section class="stranka-hlava stranka-hlava-menu">
   <p class="nadtitul">Jídelní lístek</p>
-  <h1>Pizza, něco k pivu<br>a sladké ke kávě</h1>
-  <p class="perex">Pizzy mají 32 centimetrů a těsto nechává zrát do druhého dne. Co má tlačítko <span class="inline-pridat">${ikona("plus")}Přidat</span>, upečeme i s sebou.</p>
+  <h1>Pizzy z naší pece,<br>pochutiny a pití</h1>
+  <p class="perex">Pizzy mají 32 centimetrů, na tomatovém nebo smetanovém základu. Co má tlačítko <span class="inline-pridat">${ikona("plus")}Přidat</span>, upečeme i s sebou.</p>
 </section>
 
 <section class="filtry" aria-label="Filtr jídelního lístku" data-filtry>
@@ -161,24 +161,20 @@ export function menuStranka({ menu }) {
     ${kat.map((c) => `<button type="button" class="chip" data-kat="${c.id}" aria-pressed="false">${c.nazev}</button>`).join("")}
   </div>
   <div class="chipy" role="group" aria-label="Vlastnosti">
-    ${["vege", "smetana", "palive", "deti"].map((s) => `<button type="button" class="chip chip-stitek" data-stitek="${s}" aria-pressed="false">${STITKY[s]}</button>`).join("")}
-    <button type="button" class="chip chip-stitek" data-bez-lepku aria-pressed="false" title="Skryje jídla s alergenem 1">bez lepku</button>
+    ${["vege", "smetana", "palive"].map((s) => `<button type="button" class="chip chip-stitek" data-stitek="${s}" aria-pressed="false">${STITKY[s]}</button>`).join("")}
   </div>
 </section>
 
 <div class="listek-obsah" data-listek>
 ${skupiny.map((s) => `<section class="listek-skupina" data-skupina="${s.id}" aria-labelledby="k-${s.id}">
   <header class="skupina-hlava"><h2 id="k-${s.id}">${s.nazev}</h2><p>${esc(s.popis)}</p></header>
-  ${s.id === "pizza" ? `<div class="priplatky-info">${ikona("plus")}<p>K pizze přidáme: ${menu.priplatky.map((p) => `${p.nazev} ${fmtKc(p.cena)}`).join(" · ")}. Krabice ${fmtKc(15)}.</p></div>` : ""}
-  <div class="jidla">${s.polozky.map((p) => kartaJidla(p)).join("")}</div>
+  ${s.id === "pizza" ? `<div class="priplatky-info">${ikona("plus")}<p><strong>Něco navíc?</strong> Uzeniny a sýry ${fmtKc(40)} za surovinu, ostatní suroviny ${fmtKc(20)}. Pizza krabice ${fmtKc(15)}.</p></div>` : ""}
+  <div class="jidla${["pizza", "pochutiny"].includes(s.id) ? "" : " jidla-kompakt"}">${s.polozky.map((p) => kartaJidla(p)).join("")}</div>
 </section>`).join("\n")}
 <p class="nic-nenalezeno" data-nic hidden>Tohle na lístku nemáme. Zkuste jiné slovo – nebo se zeptejte u baru, třeba to upečeme.</p>
 </div>
 
-<section class="alergeny-legenda" aria-labelledby="alergeny-h">
-  <h2 id="alergeny-h">Alergeny</h2>
-  <p>1 lepek · 2 korýši · 3 vejce · 4 ryby · 5 arašídy · 6 sója · 7 mléko · 8 ořechy · 9 celer · 10 hořčice · 11 sezam · 12 oxid siřičitý · 13 lupina · 14 měkkýši</p>
-</section>
+<p class="alergeny-pozn">Alergeny v jednotlivých jídlech vám rádi řekneme u baru.</p>
 
 <dialog class="dialog" data-dialog-pizza aria-labelledby="dp-nazev">
   <form method="dialog" class="dialog-in" data-dialog-form>
@@ -291,9 +287,8 @@ export function zahradaStranka({ podnik }) {
     <p>Koutek je oplocený a stoly kolem něj stojí tak, aby na něj bylo vidět. Děti si hrají, vy dojíte. Když se setmí, rozsvítíme.</p>
     <ul class="vycet">
       <li>${ikona("dite")}Oplocený koutek u stolů</li>
-      <li>${ikona("pizza")}Dětská pizza Malý čmelák (24 cm)</li>
       <li>${ikona("zidle")}Vysoké židličky a přebalovací pult</li>
-      <li>${ikona("dort")}Palačinky, zmrzlina a domácí limonáda</li>
+      <li>${ikona("list")}Domácí limonády, lízátka a pítíčko</li>
     </ul>
   </div>
 </section>
@@ -315,7 +310,7 @@ export function zahradaStranka({ podnik }) {
 
 <section class="mozaika" aria-label="Fotografie">
   <div class="mz mz-1">${foto("pivo", "Točené pivo", { sizes: "(min-width: 900px) 25vw, 50vw" })}</div>
-  <div class="mz mz-2">${foto("kava-dort", "Cappuccino a domácí dort", { sizes: "(min-width: 900px) 25vw, 50vw" })}</div>
+  <div class="mz mz-2">${foto("kava-dort", "Cappuccino na zahradě", { sizes: "(min-width: 900px) 25vw, 50vw" })}</div>
   <div class="mz mz-3">${foto("pec", "Pizza vytahovaná z pece", { sizes: "(min-width: 900px) 25vw, 50vw" })}</div>
   <div class="mz mz-4">${foto("cmelak", "Čmelák na levanduli", { sizes: "(min-width: 900px) 25vw, 50vw" })}</div>
 </section>

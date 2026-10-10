@@ -1,56 +1,675 @@
 {
-  "_pozn": "SMYŠLENÝ jídelní lístek pro ukázku – názvy, složení i ceny je potřeba nahradit skutečnými.",
-  "kategorie": [
-    { "id": "pizza", "nazev": "Pizza", "popis": "Průměr 32 cm, těsto zrající do druhého dne. Rajčatový, nebo smetanový základ." },
-    { "id": "snacky", "nazev": "Něco k pivu", "popis": "Na zahradu i s sebou." },
-    { "id": "dezerty", "nazev": "Sladké a káva", "popis": "Dorty pečeme podle nálady a sezóny – zeptejte se u baru." },
-    { "id": "napoje", "nazev": "Pití", "popis": "Pivo z čepu, domácí limonády a něco pro děti." }
-  ],
-  "priplatky": [
-    { "id": "syr", "nazev": "extra sýr", "cena": 30 },
-    { "id": "sunka", "nazev": "šunka", "cena": 35 },
-    { "id": "slanina", "nazev": "slanina", "cena": 35 },
-    { "id": "vejce", "nazev": "vejce", "cena": 20 },
-    { "id": "zampiony", "nazev": "žampiony", "cena": 25 },
-    { "id": "olivy", "nazev": "olivy", "cena": 25 },
-    { "id": "jalapenos", "nazev": "jalapeños", "cena": 25 },
-    { "id": "rukola", "nazev": "rukola", "cena": 20 }
-  ],
-  "polozky": [
-    { "id": "cmelak", "nazev": "Čmelák", "kategorie": "pizza", "cena": 229, "slozeni": "rajčatový základ, mozzarella, pancetta, gorgonzola, hruška, med, vlašské ořechy", "stitky": ["specialita"], "alergeny": [1, 7, 8], "objednat": true },
-    { "id": "margherita", "nazev": "Margherita", "kategorie": "pizza", "cena": 159, "slozeni": "rajčatový základ, mozzarella, čerstvá bazalka, olivový olej", "stitky": ["vege"], "alergeny": [1, 7], "objednat": true },
-    { "id": "sunkova", "nazev": "Šunková", "kategorie": "pizza", "cena": 179, "slozeni": "rajčatový základ, mozzarella, šunka od řezníka", "stitky": ["deti"], "alergeny": [1, 7], "objednat": true },
-    { "id": "sunkova-zampiony", "nazev": "Šunková se žampiony", "kategorie": "pizza", "cena": 189, "slozeni": "rajčatový základ, mozzarella, šunka, žampiony", "stitky": [], "alergeny": [1, 7], "objednat": true },
-    { "id": "salamova", "nazev": "Salámová", "kategorie": "pizza", "cena": 189, "slozeni": "rajčatový základ, mozzarella, salám", "stitky": ["deti"], "alergeny": [1, 7], "objednat": true },
-    { "id": "hawaii", "nazev": "Havaj", "kategorie": "pizza", "cena": 189, "slozeni": "rajčatový základ, mozzarella, šunka, ananas", "stitky": [], "alergeny": [1, 7], "objednat": true },
-    { "id": "zeleninova", "nazev": "Zahrádka", "kategorie": "pizza", "cena": 189, "slozeni": "rajčatový základ, mozzarella, paprika, kukuřice, cherry rajčata, žampiony, olivy", "stitky": ["vege"], "alergeny": [1, 7], "objednat": true },
-    { "id": "ctyri-syry", "nazev": "Čtyři sýry", "kategorie": "pizza", "cena": 209, "slozeni": "rajčatový základ, mozzarella, eidam, niva, parmazán", "stitky": ["vege"], "alergeny": [1, 7], "objednat": true },
-    { "id": "diabolo", "nazev": "Diabolo", "kategorie": "pizza", "cena": 209, "slozeni": "rajčatový základ, mozzarella, pikantní salám, jalapeños, červená cibule, chilli", "stitky": ["palive"], "alergeny": [1, 7], "objednat": true },
-    { "id": "tunakova", "nazev": "Tuňáková", "kategorie": "pizza", "cena": 209, "slozeni": "rajčatový základ, mozzarella, tuňák, červená cibule, olivy, kapary", "stitky": [], "alergeny": [1, 4, 7], "objednat": true },
-    { "id": "selska", "nazev": "Selská", "kategorie": "pizza", "cena": 219, "slozeni": "rajčatový základ, mozzarella, slanina, klobása, cibule, vejce", "stitky": [], "alergeny": [1, 3, 7], "objednat": true },
-    { "id": "bianca", "nazev": "Bianca", "kategorie": "pizza", "cena": 179, "slozeni": "smetanový základ, mozzarella, česnek, rozmarýn, olivový olej", "stitky": ["vege", "smetana"], "alergeny": [1, 7], "objednat": true },
-    { "id": "spenatova", "nazev": "Špenátová", "kategorie": "pizza", "cena": 199, "slozeni": "smetanový základ, mozzarella, listový špenát, česnek, vejce", "stitky": ["vege", "smetana"], "alergeny": [1, 3, 7], "objednat": true },
-    { "id": "slaninova", "nazev": "Slanina s cibulkou", "kategorie": "pizza", "cena": 209, "slozeni": "smetanový základ, mozzarella, slanina, cibule, eidam", "stitky": ["smetana"], "alergeny": [1, 7], "objednat": true },
-    { "id": "kureci", "nazev": "Kuřecí", "kategorie": "pizza", "cena": 219, "slozeni": "smetanový základ, mozzarella, kuřecí maso, kukuřice, červená cibule", "stitky": ["smetana"], "alergeny": [1, 7], "objednat": true },
-    { "id": "maly-cmelak", "nazev": "Malý čmelák", "kategorie": "pizza", "cena": 119, "slozeni": "dětská pizza 24 cm – rajčatový základ, mozzarella, šunka, kukuřice", "stitky": ["deti"], "alergeny": [1, 7], "objednat": true },
-
-    { "id": "pizza-chleb", "nazev": "Pizzový chléb s česnekem", "kategorie": "snacky", "cena": 79, "slozeni": "z pizzového těsta, česnekové máslo, rozmarýn", "stitky": ["vege"], "alergeny": [1, 7], "objednat": true },
-    { "id": "hranolky", "nazev": "Hranolky", "kategorie": "snacky", "cena": 59, "slozeni": "s tatarkou nebo kečupem", "stitky": ["vege", "deti"], "alergeny": [3, 10], "objednat": true },
-    { "id": "stripsy", "nazev": "Kuřecí stripsy s hranolky", "kategorie": "snacky", "cena": 169, "slozeni": "kuřecí prsa v křupavé strouhance, hranolky, tatarka", "stitky": ["deti"], "alergeny": [1, 3, 10], "objednat": true },
-    { "id": "hermelin", "nazev": "Nakládaný hermelín", "kategorie": "snacky", "cena": 89, "slozeni": "s cibulí a feferonkou, pečivo", "stitky": ["vege"], "alergeny": [1, 7], "objednat": true },
-    { "id": "utopenec", "nazev": "Utopenec", "kategorie": "snacky", "cena": 79, "slozeni": "s cibulí, pečivo", "stitky": [], "alergeny": [1, 10], "objednat": true },
-
-    { "id": "dort", "nazev": "Dort dne", "kategorie": "dezerty", "cena": 79, "slozeni": "domácí, podle denní nabídky", "stitky": ["vege"], "alergeny": [1, 3, 7, 8], "objednat": true },
-    { "id": "palacinka", "nazev": "Palačinka", "kategorie": "dezerty", "cena": 69, "slozeni": "s marmeládou nebo s nutelou a banánem", "stitky": ["vege", "deti"], "alergeny": [1, 3, 7, 8], "objednat": true },
-    { "id": "pohar", "nazev": "Zmrzlinový pohár", "kategorie": "dezerty", "cena": 89, "slozeni": "tři kopečky, šlehačka, ovoce", "stitky": ["vege", "deti"], "alergeny": [7], "objednat": false },
-    { "id": "espresso", "nazev": "Espresso", "kategorie": "dezerty", "cena": 49, "slozeni": "", "stitky": [], "alergeny": [], "objednat": false },
-    { "id": "cappuccino", "nazev": "Cappuccino", "kategorie": "dezerty", "cena": 59, "slozeni": "", "stitky": [], "alergeny": [7], "objednat": false },
-
-    { "id": "pivo10", "nazev": "Pivo z čepu 10°", "kategorie": "napoje", "cena": 45, "slozeni": "0,5 l", "stitky": [], "alergeny": [1], "objednat": false },
-    { "id": "pivo12", "nazev": "Pivo z čepu 12°", "kategorie": "napoje", "cena": 55, "slozeni": "0,5 l", "stitky": [], "alergeny": [1], "objednat": false },
-    { "id": "kofola", "nazev": "Kofola z čepu", "kategorie": "napoje", "cena": 39, "slozeni": "0,5 l", "stitky": ["deti"], "alergeny": [], "objednat": false },
-    { "id": "limonada", "nazev": "Domácí limonáda", "kategorie": "napoje", "cena": 59, "slozeni": "0,4 l – máta a citron, nebo bezinka", "stitky": ["deti"], "alergeny": [], "objednat": true },
-    { "id": "dzus", "nazev": "Džus pro malé", "kategorie": "napoje", "cena": 29, "slozeni": "0,2 l", "stitky": ["deti"], "alergeny": [], "objednat": false },
-    { "id": "cokolada", "nazev": "Horká čokoláda", "kategorie": "napoje", "cena": 59, "slozeni": "se šlehačkou", "stitky": ["deti"], "alergeny": [7], "objednat": false }
-  ]
+ "_pozn": "Podle tištěného lístku U Čmeláka (fotky od Michaela 10. 10. 2026). Konkrétní seznam příplatkových surovin je odvozený ze surovin na pizzách – lístek uvádí jen „uzeniny, sýry 40 Kč, ostatní 20 Kč“.",
+ "kategorie": [
+  {
+   "id": "pizza",
+   "nazev": "Pizzy z naší pece",
+   "popis": "32 cm – poctivá porce chuti."
+  },
+  {
+   "id": "pochutiny",
+   "nazev": "Pochutiny",
+   "popis": "Dle aktuální nabídky."
+  },
+  {
+   "id": "pivo",
+   "nazev": "Pivo",
+   "popis": "Pilsner Urquell z čepu."
+  },
+  {
+   "id": "nealko",
+   "nazev": "Nealko",
+   "popis": ""
+  },
+  {
+   "id": "teple",
+   "nazev": "Teplé nápoje",
+   "popis": ""
+  },
+  {
+   "id": "michane",
+   "nazev": "Míchané nápoje",
+   "popis": ""
+  },
+  {
+   "id": "alko",
+   "nazev": "Alkoholické nápoje",
+   "popis": "Po 0,04 l."
+  },
+  {
+   "id": "vino",
+   "nazev": "Vinný lístek",
+   "popis": "Rozlévaná vína po 1 dcl."
+  }
+ ],
+ "priplatky": [
+  {
+   "id": "sunka",
+   "nazev": "šunka",
+   "cena": 40
+  },
+  {
+   "id": "salam",
+   "nazev": "salám",
+   "cena": 40
+  },
+  {
+   "id": "slanina",
+   "nazev": "slanina",
+   "cena": 40
+  },
+  {
+   "id": "prosciutto",
+   "nazev": "prosciutto crudo",
+   "cena": 40
+  },
+  {
+   "id": "mozzarella",
+   "nazev": "mozzarella",
+   "cena": 40
+  },
+  {
+   "id": "gorgonzola",
+   "nazev": "gorgonzola",
+   "cena": 40
+  },
+  {
+   "id": "scamorza",
+   "nazev": "uzená scamorza",
+   "cena": 40
+  },
+  {
+   "id": "grana",
+   "nazev": "grana padano",
+   "cena": 40
+  },
+  {
+   "id": "zampiony",
+   "nazev": "žampiony",
+   "cena": 20
+  },
+  {
+   "id": "cibule",
+   "nazev": "cibule",
+   "cena": 20
+  },
+  {
+   "id": "kukurice",
+   "nazev": "kukuřice",
+   "cena": 20
+  },
+  {
+   "id": "paprika",
+   "nazev": "paprika",
+   "cena": 20
+  },
+  {
+   "id": "brokolice",
+   "nazev": "brokolice",
+   "cena": 20
+  },
+  {
+   "id": "artycoky",
+   "nazev": "artyčoky",
+   "cena": 20
+  },
+  {
+   "id": "chilli",
+   "nazev": "chilli papričky",
+   "cena": 20
+  },
+  {
+   "id": "cesnek",
+   "nazev": "česnek",
+   "cena": 20
+  }
+ ],
+ "priplatky_text": "uzeniny a sýry 40 Kč za surovinu, ostatní 20 Kč za surovinu, krabice 15 Kč",
+ "polozky": [
+  {
+   "id": "margherita",
+   "cislo": 1,
+   "nazev": "Margherita",
+   "kategorie": "pizza",
+   "cena": 175,
+   "slozeni": "tomatový základ, mozzarella, bazalka",
+   "stitky": [
+    "vege"
+   ],
+   "objednat": true
+  },
+  {
+   "id": "funghi",
+   "cislo": 2,
+   "nazev": "Funghi",
+   "kategorie": "pizza",
+   "cena": 185,
+   "slozeni": "tomatový základ, mozzarella, žampiony",
+   "stitky": [
+    "vege"
+   ],
+   "objednat": true
+  },
+  {
+   "id": "prosciutto-cotto",
+   "cislo": 3,
+   "nazev": "Prosciutto cotto",
+   "kategorie": "pizza",
+   "cena": 195,
+   "slozeni": "tomatový základ, mozzarella, šunka",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "vegetariana",
+   "cislo": 4,
+   "nazev": "Vegetariana",
+   "kategorie": "pizza",
+   "cena": 185,
+   "slozeni": "tomatový základ, mozzarella, paprika, žampiony, kukuřice, brokolice",
+   "stitky": [
+    "vege"
+   ],
+   "objednat": true
+  },
+  {
+   "id": "capricciosa",
+   "cislo": 5,
+   "nazev": "Capricciosa",
+   "kategorie": "pizza",
+   "cena": 230,
+   "slozeni": "tomatový základ, mozzarella, šunka, žampiony, artyčoky",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "quattro-formaggi",
+   "cislo": 6,
+   "nazev": "Quattro formaggi",
+   "kategorie": "pizza",
+   "cena": 235,
+   "slozeni": "smetanový základ, mozzarella, gorgonzola D.O.P., uzená scamorza, grana padano",
+   "stitky": [
+    "vege",
+    "smetana"
+   ],
+   "objednat": true
+  },
+  {
+   "id": "messicana",
+   "cislo": 7,
+   "nazev": "Messicana",
+   "kategorie": "pizza",
+   "cena": 245,
+   "slozeni": "tomatový základ, mozzarella, salám, slanina, cibule, kukuřice, chilli papričky",
+   "stitky": [
+    "palive"
+   ],
+   "objednat": true
+  },
+  {
+   "id": "picante",
+   "cislo": 8,
+   "nazev": "Picante",
+   "kategorie": "pizza",
+   "cena": 235,
+   "slozeni": "tomatový základ, salám, gorgonzola D.O.P., chilli papričky",
+   "stitky": [
+    "palive"
+   ],
+   "objednat": true
+  },
+  {
+   "id": "salami",
+   "cislo": 9,
+   "nazev": "Salami",
+   "kategorie": "pizza",
+   "cena": 220,
+   "slozeni": "tomatový základ, mozzarella, salám",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "bacon",
+   "cislo": 10,
+   "nazev": "Bacon",
+   "kategorie": "pizza",
+   "cena": 230,
+   "slozeni": "tomatový základ, mozzarella, anglická slanina, cibule",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "prosciutto-cotto-funghi",
+   "cislo": 11,
+   "nazev": "Prosciutto cotto e funghi",
+   "kategorie": "pizza",
+   "cena": 210,
+   "slozeni": "tomatový základ, mozzarella, šunka, žampiony",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "spinaci",
+   "cislo": 12,
+   "nazev": "Spinaci",
+   "kategorie": "pizza",
+   "cena": 235,
+   "slozeni": "špenátovo-smetanový základ, česnek, slanina, cibule",
+   "stitky": [
+    "smetana"
+   ],
+   "objednat": true
+  },
+  {
+   "id": "prosciutto-crudo",
+   "cislo": 13,
+   "nazev": "Prosciutto crudo",
+   "kategorie": "pizza",
+   "cena": 235,
+   "slozeni": "tomatový základ, mozzarella, prosciutto crudo",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "utopenec",
+   "nazev": "Utopenec",
+   "kategorie": "pochutiny",
+   "cena": 75,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "hermelin",
+   "nazev": "Nakládaný hermelín",
+   "kategorie": "pochutiny",
+   "cena": 95,
+   "slozeni": "",
+   "stitky": [
+    "vege"
+   ],
+   "objednat": true
+  },
+  {
+   "id": "kimchi",
+   "nazev": "Kimchi",
+   "kategorie": "pochutiny",
+   "cena": 125,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "hranolky",
+   "nazev": "Hranolky",
+   "kategorie": "pochutiny",
+   "cena": 55,
+   "slozeni": "",
+   "stitky": [
+    "vege"
+   ],
+   "objednat": true
+  },
+  {
+   "id": "lizatko",
+   "nazev": "Lízátko",
+   "kategorie": "pochutiny",
+   "cena": 20,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "bramburky",
+   "nazev": "Brambůrky",
+   "kategorie": "pochutiny",
+   "cena": 55,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "tycinky",
+   "nazev": "Tyčinky",
+   "kategorie": "pochutiny",
+   "cena": 35,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "orisky",
+   "nazev": "Oříšky",
+   "kategorie": "pochutiny",
+   "cena": 45,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "limonady",
+   "nazev": "Domácí limonády",
+   "kategorie": "nealko",
+   "cena": 65,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "plechovky",
+   "nazev": "Plechovky dle nabídky",
+   "kategorie": "nealko",
+   "cena": 42,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": true
+  },
+  {
+   "id": "voda-perliva",
+   "nazev": "Voda perlivá s citronem",
+   "kategorie": "nealko",
+   "cena": 35,
+   "slozeni": "0,5 l",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "voda-kohoutkova",
+   "nazev": "Kohoutková s citronem",
+   "kategorie": "nealko",
+   "cena": 15,
+   "slozeni": "0,5 l",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "nealko-rozlevane",
+   "nazev": "Rozlévané nealko nápoje",
+   "kategorie": "nealko",
+   "cena": 10,
+   "slozeni": "0,1 l",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "pititko",
+   "nazev": "Pítíčko",
+   "kategorie": "nealko",
+   "cena": 25,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "pilsner-03",
+   "nazev": "Pilsner Urquell",
+   "kategorie": "pivo",
+   "cena": 45,
+   "slozeni": "0,3 l",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "pilsner-05",
+   "nazev": "Pilsner Urquell",
+   "kategorie": "pivo",
+   "cena": 56,
+   "slozeni": "0,5 l",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "nealko-pivo",
+   "nazev": "Nealko pivo",
+   "kategorie": "pivo",
+   "cena": 45,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "latte",
+   "nazev": "Latte",
+   "kategorie": "teple",
+   "cena": 75,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "cappuccino",
+   "nazev": "Cappuccino",
+   "kategorie": "teple",
+   "cena": 65,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "espresso",
+   "nazev": "Espresso",
+   "kategorie": "teple",
+   "cena": 50,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "caj",
+   "nazev": "Čaj dle nabídky",
+   "kategorie": "teple",
+   "cena": 50,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "aperol",
+   "nazev": "Aperol Spritz",
+   "kategorie": "michane",
+   "cena": 120,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "limoncello",
+   "nazev": "Limoncello Spritz",
+   "kategorie": "michane",
+   "cena": 120,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "hugo",
+   "nazev": "Hugo Spritz",
+   "kategorie": "michane",
+   "cena": 120,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "mojito",
+   "nazev": "Mojito",
+   "kategorie": "michane",
+   "cena": 135,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "cuba-libre",
+   "nazev": "Cuba Libre",
+   "kategorie": "michane",
+   "cena": 120,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "koktejly",
+   "nazev": "Speciální koktejly dle nabídky",
+   "kategorie": "michane",
+   "cena": null,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "vodka",
+   "nazev": "Vodka",
+   "kategorie": "alko",
+   "cena": 85,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "havana",
+   "nazev": "Havana",
+   "kategorie": "alko",
+   "cena": 85,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "jagermeister",
+   "nazev": "Jägermeister",
+   "kategorie": "alko",
+   "cena": 85,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "tullamore",
+   "nazev": "Tullamore Dew",
+   "kategorie": "alko",
+   "cena": 85,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "zelena",
+   "nazev": "Zelená",
+   "kategorie": "alko",
+   "cena": 55,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "palenka",
+   "nazev": "Pálenka dle nabídky",
+   "kategorie": "alko",
+   "cena": 95,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "premiove",
+   "nazev": "Prémiové láhve",
+   "kategorie": "alko",
+   "cena": 125,
+   "slozeni": "",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "tramin",
+   "nazev": "Tramín červený",
+   "kategorie": "vino",
+   "cena": 50,
+   "slozeni": "bílé · polosuché · 1 dcl",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "hibernal",
+   "nazev": "Hibernal",
+   "kategorie": "vino",
+   "cena": 50,
+   "slozeni": "bílé · polosuché · 1 dcl",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "palava",
+   "nazev": "Pálava",
+   "kategorie": "vino",
+   "cena": 60,
+   "slozeni": "bílé · polosuché · 1 dcl",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "aurelius",
+   "nazev": "Aurelius",
+   "kategorie": "vino",
+   "cena": 60,
+   "slozeni": "bílé · polosuché · 1 dcl",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "ryzlink",
+   "nazev": "Ryzlink vlašský",
+   "kategorie": "vino",
+   "cena": 60,
+   "slozeni": "bílé · suché · 1 dcl",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "cuvee-pinot",
+   "nazev": "Cuvée Pinot",
+   "kategorie": "vino",
+   "cena": 60,
+   "slozeni": "bílé · suché · 1 dcl",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "syrah-merlot",
+   "nazev": "Syrah / Merlot barrique",
+   "kategorie": "vino",
+   "cena": 120,
+   "slozeni": "červené · 1 dcl",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "zweigeltrebe",
+   "nazev": "Zweigeltrebe",
+   "kategorie": "vino",
+   "cena": 60,
+   "slozeni": "růžové · suché · 1 dcl",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "prosecco",
+   "nazev": "Prosecco",
+   "kategorie": "vino",
+   "cena": 60,
+   "slozeni": "sekt · suché · 1 dcl",
+   "stitky": [],
+   "objednat": false
+  },
+  {
+   "id": "symphony",
+   "nazev": "Symphony SG",
+   "kategorie": "vino",
+   "cena": 70,
+   "slozeni": "sekt · 1 dcl",
+   "stitky": [],
+   "objednat": false
+  }
+ ]
 }

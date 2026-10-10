@@ -71,7 +71,7 @@ function paticka(podnik, koren, tyden) {
   </div>
   <div class="paticka-spodek">
     <p>© ${new Date().getFullYear()} U Čmeláka · IČO ${esc(podnik.ico)}</p>
-    <p class="ukazka-pozn"><strong>Ukázka návrhu webu.</strong> Jídelní lístek, ceny, akce a fotografie jsou smyšlené (fotky jsou ilustrační, vygenerované). Objednávky se nikam neodesílají.</p>
+    <p class="ukazka-pozn"><strong>Ukázka návrhu webu.</strong> Jídelní lístek je podle tištěného lístku; akce jsou smyšlené a fotky ilustrační (vygenerované). Objednávky se nikam neodesílají.</p>
   </div>
 </footer>`;
 }

@@ -4,8 +4,10 @@ U Čmeláka – ukázka návrhu webu
 Otevřete index.html (nejlépe přes jednoduchý server, např. „python3 -m http.server“
 v této složce a pak http://localhost:8000/).
 
-Co je skutečné: adresa, telefon, IČO a otevírací doba (z veřejného zápisu na firmy.cz).
-Co je smyšlené: jídelní lístek, ceny, příplatky, program akcí, e-mail. Fotografie jsou
+Co je skutečné: adresa, telefon, IČO, otevírací doba (firmy.cz) a celý jídelní a nápojový
+lístek s cenami a příplatky (podle tištěného lístku). Seznam příplatkových surovin je
+odvozený ze surovin na pizzách.
+Co je smyšlené: program akcí, e-mail, kapacity kuchyně, popisy zahrady a koutku. Fotografie jsou
 ilustrační a vygenerované – před spuštěním je nahradí skutečné fotky terasy, koutku a jídla.
 
 Objednávka na vyzvednutí je klikací ukázka: košík, výběr času podle otevírací doby

@@ -36,3 +36,12 @@ Viz STATE.md (generuje harness). Poslední shrnutí operátora: —
   běh ve worktree `../U Cmelaka-factory` (větev factory). Šablony, CSS, web.js píše operátor.
 - Build `node build.mjs` → out/, náhled `.claude/launch.json` → `cmelak` (port 4410),
   kontrola `uv run --with playwright python tools/kontrola/kontrola.py http://localhost:4410/`.
+
+## 2026-10-10 (večer): skutečný jídelní lístek
+- Michael poslal fotky tištěného lístku (2× HEIC). Zapracováno do data/menu.json: 13 pizz
+  (32 cm, čísla 1–13 jako na lístku), pochutiny, nealko, pivo (Pilsner Urquell 0,3/0,5), teplé,
+  míchané, alkohol 0,04 l, vína po 1 dcl. Příplatky: uzeniny a sýry 40 Kč, ostatní 20 Kč,
+  krabice 15 Kč – konkrétní seznam surovin je odvozený ze surovin na pizzách.
+- Alergeny lístek neuvádí → smyšlená čísla alergenů a filtr „bez lepku“ odstraněny,
+  místo nich věta „alergeny řekneme u baru“. Pryč i dětská pizza, dorty, palačinky.
+- Na lístku je jejich logo (čmelák s pivem a pizzou) a plástve – návrh s nimi ladí.

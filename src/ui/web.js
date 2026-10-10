@@ -188,11 +188,6 @@
         b.setAttribute("aria-pressed", String(i < 0)); proved();
       });
     });
-    var bezLepku = $("[data-bez-lepku]", filtry);
-    bezLepku.addEventListener("click", function () {
-      var zap = bezLepku.getAttribute("aria-pressed") !== "true";
-      stavF.bezAlergenu = zap ? [1] : []; bezLepku.setAttribute("aria-pressed", String(zap)); proved();
-    });
   }
 
   /* ---------- akce: proběhlé schovat, „za 3 dny“ ---------- */

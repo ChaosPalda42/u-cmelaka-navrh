@@ -542,3 +542,17 @@ picture.foto { width: 100%; height: 100%; }
 @media (min-width: 621px) and (max-width: 900px) { .akce-mrizka .akce-foto { position: relative; } .akce-mrizka .akce-foto picture { position: absolute; inset: 0; } }
 .hero { overflow-x: clip; overflow-y: visible; }
 @media (max-width: 360px) { .hlavicka-in { gap: 8px; } .logo { gap: 6px; } .logo-text { font-size: 1.08rem; } .logo-cmelak { width: 36px; } .hlavicka-akce { gap: 4px; } .ikona-btn, .kosik-btn, .menu-btn { width: 38px; height: 38px; } }
+.jidlo-cislo { flex: none; align-self: center; display: inline-grid; place-items: center; width: 26px; height: 30px; font: 700 .82rem/1 var(--f-text); color: #f6ecd6; background: var(--cokolada); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+:root[data-tema="tmavy"] .jidlo-cislo { background: var(--med); color: #2a1f14; }
+@media (prefers-color-scheme: dark) { :root:not([data-tema="svetly"]) .jidlo-cislo { background: var(--med); color: #2a1f14; } }
+.alergeny-pozn { max-width: var(--max); margin: 0 auto; padding: 0 var(--okraj) 64px; color: var(--text-3); font-size: .92rem; }
+.priplatky { max-height: 46vh; overflow-y: auto; }
+.jidla-kompakt { grid-template-columns: repeat(3, 1fr); gap: 0 32px; }
+.jidla-kompakt .jidlo { background: none; border: 0; border-bottom: 1px dashed var(--linka); border-radius: 0; padding: 12px 0; box-shadow: none; }
+.jidla-kompakt .jidlo-nazev { font-size: 1.08rem; }
+.jidla-kompakt .jidlo-cena { font-size: 1rem; }
+.jidla-kompakt .jidlo-slozeni { margin: 2px 0 0; font-size: .9rem; }
+.jidla-kompakt .jidlo-pata:not(:has(.pridat)) { display: none; }
+.jidla-kompakt .jidlo-pata { margin-top: 8px; }
+@media (max-width: 1000px) { .jidla-kompakt { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) { .jidla-kompakt { grid-template-columns: 1fr; } }
