@@ -71,12 +71,8 @@
     return st;
   }
 
-  /** Ukázka: pár už přijatých objednávek, aby bylo vidět, že se sloty plní. */
-  function demoObsazeno() {
-    return CM.vyzvednuti.obsazenost([
-      { cas: "17:30", pizz: 4 }, { cas: "17:30", pizz: 2 }, { cas: "18:00", pizz: 5 }, { cas: "18:15", pizz: 3 }, { cas: "19:00", pizz: 6 }
-    ]);
-  }
+  /** Obsazenost kuchyně zatím nevedeme (objednávky přijímá bistro po telefonu) – všechny časy jsou volné. */
+  function demoObsazeno() { return {}; }
 
   /* ---------- košík ---------- */
   function kosik() { return CM.kosik.nactiKosik(nacti(KLIC_KOSIK)); }

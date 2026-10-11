@@ -182,7 +182,7 @@ main > section { max-width: var(--max); margin-inline: auto; padding-inline: var
 
 /* ---------- hero ---------- */
 .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 64px); align-items: center; padding-block: clamp(28px, 5vw, 64px) clamp(40px, 6vw, 80px); }
-.hero h1 em { display: inline-block; position: relative; }
+.hero h1 em { display: inline; position: relative; white-space: nowrap; }
 .hero h1 em::after { content: ""; position: absolute; left: -2%; right: -2%; bottom: .04em; height: .22em; background: var(--med); opacity: .45; border-radius: 4px; z-index: -1; transform: rotate(-1.5deg); }
 .hero-obraz { position: relative; }
 .hero-blob { border-radius: 46% 54% 42% 58% / 52% 44% 56% 48%; overflow: hidden; aspect-ratio: 1.05; box-shadow: var(--stin-velky); animation: blob 18s ease-in-out infinite alternate; }

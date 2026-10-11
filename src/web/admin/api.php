@@ -1,4 +1,6 @@
 <?php
+ini_set("display_errors", "0");
+ini_set("log_errors", "1");
 /** API administrace. Odpovídá vždy JSONem {ok, …}. Všechno kromě stavu a přihlášení chce přihlášení a CSRF token. */
 require __DIR__ . "/../inc/jadro.php";
 require __DIR__ . "/../inc/validace.php";

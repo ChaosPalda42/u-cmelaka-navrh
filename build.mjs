@@ -61,7 +61,7 @@ async function main() {
   await writeFile(path.join(OUT, "assets/knihovny.js"), await svazekKnihoven());
   await cp(path.join(KOREN, "src/ui/web.js"), path.join(OUT, "assets/web.js"));
   await writeFile(path.join(OUT, "favicon.svg"), FAVICON);
-  await writeFile(path.join(OUT, "assets/logo-u-cmelaka.svg"), logoOdznak({ id: "lg" }).replace("<svg ", '<svg width="800" height="800" '));
+  await writeFile(path.join(OUT, "assets/logo-u-cmelaka.svg"), logoOdznak({ id: "lg" }));
   await cp(path.join(KOREN, "src/web"), OUT, { recursive: true });
 
   // PHP knihovny a šablony

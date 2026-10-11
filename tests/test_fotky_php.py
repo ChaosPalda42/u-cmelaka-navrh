@@ -113,3 +113,13 @@ def test_smaz(tmp_path):
     (cil / "akce-dynea-0123abcd-640.jpg").write_bytes(b"x")
     assert php1(S, "cm_smaz_fotku", "akce-dyne", str(cil)) == 4
     assert [p.name for p in cil.iterdir()] == ["akce-dynea-0123abcd-640.jpg"]
+
+
+def test_bez_varovani_php(tmp_path):
+    """PHP 8.5 nesmí při zpracování vypsat žádné varování (zkazilo by JSON odpověď administrace)."""
+    import subprocess, json as _j
+    from tests.phpmod import ROOT
+    src = tmp_path / "a.jpg"; _jpg(src, 900, 600, orientace=6)
+    kod = f"require {_j.dumps(str(ROOT / 'src/php/fotky.php'))}; cm_zpracuj_fotku({_j.dumps(str(src))}, 'x', {_j.dumps(str(tmp_path / 'f'))}, [640], 1.5); cm_smaz_fotku('x', {_j.dumps(str(tmp_path / 'f'))});"
+    p = subprocess.run(["php", "-d", "error_reporting=-1", "-d", "display_errors=1", "-r", kod], capture_output=True, text=True)
+    assert p.stdout.strip() == "" and p.stderr.strip() == "", p.stdout + p.stderr

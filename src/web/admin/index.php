@@ -21,12 +21,12 @@ $v = rawurlencode(CM_VERZE);
   <div class="a-vstup-karta">
     <img class="a-vstup-logo" src="/assets/logo-u-cmelaka.svg" alt="" width="96" height="96">
     <h1>Administrace webu</h1>
-    <form data-form-prihlasit hidden>
+    <form data-form-prihlasit hidden novalidate>
       <label class="a-pole"><span>Heslo</span><input type="password" name="heslo" autocomplete="current-password" required autofocus></label>
       <p class="a-chyba" data-chyba hidden></p>
       <button class="a-btn a-btn-med" type="submit">Přihlásit se</button>
     </form>
-    <form data-form-zalozit hidden>
+    <form data-form-zalozit hidden novalidate>
       <p class="a-pozn">Vítejte! Nejdřív si zvolte heslo do administrace. Aspoň 10 znaků – klidně celá věta, třeba „pizza z pece každý den“.</p>
       <label class="a-pole"><span>Nové heslo</span><input type="password" name="heslo" autocomplete="new-password" minlength="10" required></label>
       <label class="a-pole"><span>Heslo ještě jednou</span><input type="password" name="potvrzeni" autocomplete="new-password" minlength="10" required></label>

@@ -159,7 +159,13 @@
   function ulozit() {
     var co = CO[sekce]; if (!co) return;
     var b = $("[data-ulozit]"); b.disabled = true; b.textContent = "Ukládám…";
-    api("uloz", { co: co, data: PRAC[sekce] }).then(function (d) {
+    var data = PRAC[sekce];
+    if (sekce === "listek") {
+      // nová jídla dostanou adresu podle názvu (server ji vytvoří z prázdného id)
+      data = kopie(data);
+      data.polozky.forEach(function (p) { if (/^nova-/.test(p.id)) p.id = ""; });
+    }
+    api("uloz", { co: co, data: data }).then(function (d) {
       b.disabled = false; b.textContent = "Uložit změny";
       if (!d.ok) { toast(d.chyba || "Uložení se nepovedlo.", true); if (d.chyby) ukazChyby(d.chyby); return; }
       toast("Uloženo. Na webu je to vidět hned.");

@@ -1,7 +1,7 @@
 """Akceptační test C-010 — src/php/validace.php (kontrola a úprava dat z administrace)."""
 from __future__ import annotations
 
-from tests.phpmod import lint, php, php1
+from tests.phpmod import lint, normalizuj, php, php1
 
 S = "validace.php"
 
@@ -33,7 +33,7 @@ MENU = {
 
 def test_menu_ok():
     r = php1(S, "cm_over_menu", MENU)
-    assert r["ok"] is True and r["chyby"] == {}
+    assert r["ok"] is True and normalizuj(r["chyby"]) == []
     d = r["data"]
     assert list(d) == ["kategorie", "polozky", "priplatky", "priplatky_text"]
     assert d["kategorie"] == [{"id": "pizza", "nazev": "Pizzy z naší pece", "popis": "32 cm"}, {"id": "piti", "nazev": "Pití", "popis": ""}]
@@ -70,7 +70,7 @@ def test_menu_chyby():
 
 def test_menu_prazdne_a_spatny_tvar():
     r = php1(S, "cm_over_menu", {})
-    assert r == {"ok": True, "chyby": {}, "data": {"kategorie": [], "polozky": [], "priplatky": [], "priplatky_text": ""}}
+    assert normalizuj(r) == normalizuj({"ok": True, "chyby": {}, "data": {"kategorie": [], "polozky": [], "priplatky": [], "priplatky_text": ""}})
     r = php1(S, "cm_over_menu", {"kategorie": "x", "polozky": [1, "a", None], "priplatky": None})
     assert r["ok"] is True and r["data"]["polozky"] == []
 
@@ -104,7 +104,7 @@ SCHEMA = [
 
 def test_obsah():
     r = php1(S, "cm_over_obsah", {"uvod.nadpis": "  Ahoj  ", "uvod.perex": "Řádek 1\r\nŘádek 2", "uvod.body": ["  x ", "", "y"], "cizi": "pryč"}, SCHEMA)
-    assert r == {"ok": True, "chyby": {}, "data": {"uvod.nadpis": "Ahoj", "uvod.perex": "Řádek 1\nŘádek 2", "uvod.body": ["x", "y"]}}
+    assert normalizuj(r) == normalizuj({"ok": True, "chyby": {}, "data": {"uvod.nadpis": "Ahoj", "uvod.perex": "Řádek 1\nŘádek 2", "uvod.body": ["x", "y"]}})
     r = php1(S, "cm_over_obsah", {}, SCHEMA)
     assert r["data"] == {"uvod.nadpis": "Pizza z pece", "uvod.perex": "", "uvod.body": ["a", "b"]}
     r = php1(S, "cm_over_obsah", {"uvod.nadpis": "x" * 121, "uvod.body": ["y" * 81], "uvod.perex": "Jeden\nřádek"}, SCHEMA)

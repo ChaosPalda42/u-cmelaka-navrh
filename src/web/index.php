@@ -1,4 +1,6 @@
 <?php
+ini_set("display_errors", "0");
+ini_set("log_errors", "1");
 /** Vstup webu: složí stránku z uloženého obsahu. */
 require __DIR__ . "/inc/sablony.php";
 require __DIR__ . "/inc/verze.php";

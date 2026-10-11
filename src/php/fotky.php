@@ -166,7 +166,7 @@ function cm_zpracuj_fotku(string $zdroj, string $jmeno, string $cil, array $sirk
             $bila = imagecolorallocate($obrazek, 255, 255, 255);
             $otocene = imagerotate($obrazek, $uhel, $bila);
             if ($otocene !== false) {
-                imagedestroy($obrazek);
+                // (imagedestroy je od PHP 8 zbytečné a v 8.5 zastaralé)
                 $obrazek = $otocene;
             }
         }
@@ -179,7 +179,7 @@ function cm_zpracuj_fotku(string $zdroj, string $jmeno, string $cil, array $sirk
     $bila = imagecolorallocate($plavno, 255, 255, 255);
     imagefill($plavno, 0, 0, $bila);
     imagecopy($plavno, $obrazek, 0, 0, 0, 0, $sirka, $vyska);
-    imagedestroy($obrazek);
+    // (imagedestroy je od PHP 8 zbytečné a v 8.5 zastaralé)
     $obrazek = $plavno;
 
     // 4) Středový ořez na požadovaný poměr šířka/výška.
@@ -199,7 +199,7 @@ function cm_zpracuj_fotku(string $zdroj, string $jmeno, string $cil, array $sirk
             $y0 = (int) floor(($vyska - $nova_vyska) / 2);
             $vyrez = imagecreatetruecolor($nova_sirka, $nova_vyska);
             imagecopy($vyrez, $obrazek, 0, 0, $x0, $y0, $nova_sirka, $nova_vyska);
-            imagedestroy($obrazek);
+            // (imagedestroy je od PHP 8 zbytečné a v 8.5 zastaralé)
             $obrazek = $vyrez;
             $sirka = $nova_sirka;
             $vyska = $nova_vyska;
@@ -208,7 +208,7 @@ function cm_zpracuj_fotku(string $zdroj, string $jmeno, string $cil, array $sirk
 
     // 5) Varianty.
     if (!is_dir($cil) && !mkdir($cil, 0755, true) && !is_dir($cil)) {
-        imagedestroy($obrazek);
+        // (imagedestroy je od PHP 8 zbytečné a v 8.5 zastaralé)
         return $chyba();
     }
     $varianty = cm_sirky_variant($sirka, $sirky);
@@ -220,9 +220,9 @@ function cm_zpracuj_fotku(string $zdroj, string $jmeno, string $cil, array $sirk
         imagewebp($zmensene, $cil . '/' . $jmeno . '-' . $verze . '-' . $w . '.webp', 80);
         imageinterlace($zmensene, true);
         imagejpeg($zmensene, $cil . '/' . $jmeno . '-' . $verze . '-' . $w . '.jpg', 82);
-        imagedestroy($zmensene);
+        // (imagedestroy je od PHP 8 zbytečné a v 8.5 zastaralé)
     }
-    imagedestroy($obrazek);
+    // (imagedestroy je od PHP 8 zbytečné a v 8.5 zastaralé)
 
     // 6) Starší verze téže fotky smaž.
     cm_smaz_starou_verzi($jmeno, $cil, $verze);

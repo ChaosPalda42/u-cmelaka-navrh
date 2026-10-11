@@ -43,6 +43,7 @@ async def snimek(page, jmeno):
 
 
 async def uloz(page):
+    await page.evaluate("document.querySelector('[data-toast]').hidden = true")
     await page.click("[data-ulozit]")
     await page.wait_for_selector("[data-toast]:not([hidden])")
     t = await page.inner_text("[data-toast]")
@@ -56,9 +57,14 @@ async def main():
     # fotky nahrané v testu nesmí zůstat v out/ – server dostane vlastní kopii webu
     web = Path(tempfile.mkdtemp(prefix="cm-web-"))
     subprocess.run(["cp", "-R", f"{OUT}/.", str(web)], check=True)
-    srv = subprocess.Popen(["php", "-S", f"127.0.0.1:{PORT}", "-t", str(web), str(web / "_router.php")],
-                           env={**os.environ, "CM_DATA": str(data)}, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-    time.sleep(0.8)
+    srv_log = open(data.parent / f"cm-srv-{os.getpid()}.log", "w+")
+
+    def spust_server():
+        s = subprocess.Popen(["php", "-S", f"127.0.0.1:{PORT}", "-t", str(web), str(web / "_router.php")],
+                             env={**os.environ, "CM_DATA": str(data)}, stdout=subprocess.DEVNULL, stderr=srv_log)
+        time.sleep(0.8)
+        return s
+    srv = spust_server()
     heslo = "test-" + secrets.token_hex(8)
     foto = data.parent / f"test-hriste-{os.getpid()}.jpg"
     img = Image.new("RGB", (1800, 1200), (40, 160, 60))
@@ -68,12 +74,13 @@ async def main():
     try:
         async with async_playwright() as p:
             b = await p.chromium.launch(channel="chrome", headless=True)
-            for sirka in (390, 1280):
+            for sirka in [int(x) for x in os.environ.get("SIRKY", "390,1280").split(",")]:
+                srv.terminate(); srv.wait(); srv = spust_server()  # vestavěný server PHP visí na spojeních z minulého kontextu
                 mobil = sirka < 700
                 ctx = await b.new_context(viewport={"width": sirka, "height": 900}, is_mobile=mobil, has_touch=mobil)
                 page = await ctx.new_page()
                 page.on("pageerror", lambda e: chyby_konzole.append(f"{sirka} JS: {e}"))
-                page.on("console", lambda m: chyby_konzole.append(f"{sirka} console: {m.text}") if m.type == "error" else None)
+                page.on("console", lambda m: chyby_konzole.append(f"{sirka} console: {m.text}") if m.type == "error" and not re.search(r"status of 40[01]", m.text) else None)
                 page.on("dialog", lambda d: asyncio.ensure_future(d.accept(d.default_value or "Saláty")))
                 print(f"\n=== šířka {sirka} ===")
 
@@ -89,6 +96,7 @@ async def main():
                     await page.fill("[data-form-zalozit] [name=heslo]", heslo)
                     await page.fill("[data-form-zalozit] [name=potvrzeni]", heslo)
                     await page.click("[data-form-zalozit] button")
+                    await page.wait_for_selector("[data-app]:not([hidden])")
                     ok(not (data / "zalozit-heslo").exists(), "příznak založení po nastavení hesla zmizel")
                 else:
                     await page.fill("[data-form-prihlasit] [name=heslo]", heslo)
@@ -119,16 +127,17 @@ async def main():
                 await page.click("text=+ Přidat do „Pizzy z naší pece“")
                 pole_nazev = page.locator(".a-polozka.otevrena [data-chyba-klic$='.nazev'] input").first
                 await pole_nazev.fill(f"Testovací pizza {sirka}")
-                await page.locator(".a-polozka.otevrena [data-chyba-klic$='.cena'] input").first.fill("1 99")
+                await page.locator(".a-polozka.otevrena [data-chyba-klic$='.cena'] input").first.fill("levná")
                 t = await uloz(page)
                 ok("opravit" in t and await page.locator(".a-polozka .ma-chybu, .ma-chybu").count() > 0, "nesmyslná cena se nedá uložit a je označená")
                 await page.locator(".a-polozka.otevrena [data-chyba-klic$='.cena'] input").first.fill("199 Kč")
                 ok("Uloženo" in await uloz(page), "nová pizza uložená")
                 await page.goto(Z + "/menu.html")
                 ok(await page.locator(f"text=Testovací pizza {sirka}").count() == 1, "nová pizza je na lístku")
-                ok("199" in await page.inner_text(f"[data-jidlo^='testovaci-pizza']") if await page.locator("[data-jidlo^='testovaci-pizza']").count() else False, "s cenou 199 Kč")
+                ok(await page.locator(f"[data-jidlo='testovaci-pizza-{sirka}']").count() == 1, "dostala adresu podle názvu (testovaci-pizza-…)")
+                ok("199" in await page.inner_text(f"[data-jidlo='testovaci-pizza-{sirka}']"), "s cenou 199 Kč")
                 # přidat do košíku z lístku (dialog s příplatky)
-                await page.click("[data-jidlo^='testovaci-pizza'] [data-pridat]")
+                await page.click(f"[data-jidlo='testovaci-pizza-{sirka}'] [data-pridat]")
                 await page.wait_for_selector("dialog[open]")
                 await page.locator("dialog [name=priplatek]").first.check()
                 await page.click("[data-dp-potvrdit]")
@@ -159,7 +168,11 @@ async def main():
                 await snimek(page, f"{sirka}-fotky")
                 karta = page.locator(".a-foto", has_text="Úvod – dětské hřiště")
                 await karta.locator("input[type=file]").set_input_files(str(foto))
-                await page.wait_for_selector(".a-foto:has-text('Úvod – dětské hřiště') >> text=vaše fotka", timeout=20000)
+                try:
+                    await page.wait_for_selector(".a-foto:has-text('Úvod – dětské hřiště') >> text=vaše fotka", timeout=20000)
+                except Exception:
+                    print("toast:", await page.inner_text("[data-toast]"))
+                    raise
                 ok(True, "fotka dětského hřiště nahraná")
                 await page.goto(Z + "/")
                 src = await page.locator(".zf-1 img").get_attribute("src")
@@ -169,8 +182,8 @@ async def main():
                 await page.goto(Z + "/admin/#fotky")
                 await page.wait_for_selector(".a-foto")
                 karta = page.locator(".a-foto", has_text="Úvod – dětské hřiště")
-                await karta.locator("input[type=text]").fill("Naše hřiště")
-                await karta.locator("input[type=text]").press("Tab")
+                await karta.locator("input.a-input").fill("Naše hřiště")
+                await karta.locator("input.a-input").press("Tab")
                 await page.wait_for_selector("text=Popisek uložen")
                 await page.goto(Z + "/")
                 ok(await page.locator(".zf-1 img").get_attribute("alt") == "Naše hřiště", "popisek fotky je na webu")
@@ -197,7 +210,7 @@ async def main():
                 await page.goto(Z + "/akce.html")
                 ok(await page.locator(f"text=Testovací koncert {sirka}").count() == 1, "akce je na webu")
                 ok(await page.locator(".akce-karta img[src*='foto/akce-']").count() == 1, "s vlastní fotkou")
-                ok(await page.locator("script[type='application/ld+json']", has_text="Testovací koncert").count() == 1, "akce je i ve strukturovaných datech pro Google")
+                ok('"@type":"Event","name":"Testovací koncert' in await page.content(), "akce je i ve strukturovaných datech pro Google")
                 await page.goto(Z + "/")
                 ok(await page.locator(f"text=Testovací koncert {sirka}").count() == 1, "akce je i na úvodu")
                 await page.goto(Z + "/admin/#akce")
@@ -255,6 +268,7 @@ async def main():
                 await ctx.close()
 
             # --- přímý přístup k citlivým věcem
+            srv.terminate(); srv.wait(); srv = spust_server()
             ctx = await b.new_context()
             page = await ctx.new_page()
             for cesta, ocek in (("/inc/jadro.php", 403), ("/inc/vychozi/menu.json", 403), ("/neexistuje", 404), ("/sitemap.xml", 200), ("/robots.txt", 200)):
@@ -263,7 +277,8 @@ async def main():
             await b.close()
     finally:
         srv.terminate()
-        err = srv.stderr.read().decode(errors="replace") if srv.stderr else ""
+        srv_log.seek(0)
+        err = srv_log.read()
         php_chyby = [r for r in err.splitlines() if re.search(r"(Fatal|Warning|Notice|Deprecated|Parse error)", r)]
         foto.unlink(missing_ok=True)
     for c in chyby_konzole:

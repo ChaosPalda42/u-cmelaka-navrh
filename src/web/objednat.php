@@ -1,4 +1,6 @@
 <?php
+ini_set("display_errors", "0");
+ini_set("log_errors", "1");
 /** Příjem objednávky s sebou a poptávky oslavy z webu. Posílá e-mail, jen když je to v administraci zapnuté. */
 require __DIR__ . "/inc/sablony.php";
 

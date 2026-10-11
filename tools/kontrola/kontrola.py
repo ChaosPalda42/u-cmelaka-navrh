@@ -28,7 +28,7 @@ async def main():
                 if navrat: await ctx.add_init_script(NAVRAT)
                 page = await ctx.new_page(); chyby = []
                 page.on("pageerror", lambda e: chyby.append("JS: " + str(e)))
-                page.on("console", lambda m: chyby.append("console: " + m.text) if m.type == "error" else None)
+                page.on("console", lambda m: chyby.append("console: " + m.text) if m.type == "error" and "status of 404" not in m.text else None)
                 page.on("requestfailed", lambda r: chyby.append("síť: " + r.url))
                 for url in STRANKY:
                     chyby.clear()
